@@ -7,7 +7,7 @@
 
 ---
 
-## Phase 1: LP実装 (完了)
+## Phase 1: LP実装 ✅
 
 ### 実装内容
 - ヒーローセクション
@@ -20,11 +20,11 @@
 
 ### デプロイ
 - **GitHub**: https://github.com/YumaKamiya/know-pilates
-- **Vercel**: https://know-pilates.vercel.app (初回デプロイ)
+- **Vercel**: 初回デプロイ完了
 
 ---
 
-## Phase 2: 予約システム実装 (完了 - 2024/11/26)
+## Phase 2: 予約システム実装 ✅
 
 ### 実装内容
 
@@ -48,12 +48,12 @@
 - `GET /api/reservation/slots?date=YYYY-MM-DD` - 空き枠取得
 - `POST /api/reservation/book` - 予約作成
 
-#### 4. メール通知 (オプション)
-- **ライブラリ**: Resend
+#### 4. メール通知（Gmail API）
+- **認証方式**: OAuth2（リフレッシュトークン）
 - **機能**:
   - 顧客への予約確認メール
   - スタジオへの新規予約通知メール
-- **ステータス**: APIキー未設定（設定すれば有効化）
+- **送信元**: OAuthで認証したGmailアドレス
 
 ### ファイル構成
 ```
@@ -66,44 +66,49 @@ src/
 │   └── index.ts
 ├── lib/
 │   ├── google/
-│   │   ├── auth.ts       # Google認証
+│   │   ├── auth.ts       # Google認証（サービスアカウント）
 │   │   ├── calendar.ts   # Calendar API
 │   │   ├── sheets.ts     # Sheets API
 │   │   └── index.ts
 │   ├── email/
-│   │   └── index.ts      # Resendメール送信
+│   │   └── index.ts      # Gmail APIメール送信
 │   └── validations/
 │       └── reservation.ts # Zodスキーマ
 ```
 
 ### 環境変数 (Vercel設定済み)
 ```
+# Google API（サービスアカウント）
 GOOGLE_SERVICE_ACCOUNT_EMAIL
 GOOGLE_PRIVATE_KEY
 GOOGLE_CALENDAR_ID
 GOOGLE_SHEETS_ID
 STUDIO_NAME
 STUDIO_EMAIL
+
+# Gmail API（OAuth2）
+GMAIL_CLIENT_ID
+GMAIL_CLIENT_SECRET
+GMAIL_REFRESH_TOKEN
 ```
 
 ### 本番URL
-https://know-pilates-7oayuf6i9-yks-projects-a2d094d9.vercel.app
+https://know-pilates-5vuelvu8m-yks-projects-a2d094d9.vercel.app
 
 ---
 
-## 次のステップ (未実装)
+## Phase 3: 仕上げ（未着手）
 
-### Phase 3候補
 1. **カスタムドメイン設定** - Vercelでドメイン紐付け
-2. **メール通知有効化** - Resend APIキー取得・設定
-3. **コンテンツ調整** - 写真差し替え、テキスト修正
-4. **アナリティクス** - Google Analytics導入
+2. **コンテンツ調整** - 写真差し替え、テキスト修正
+3. **アナリティクス** - Google Analytics導入
+4. **OAuth同意画面の公開** - トークン有効期限の無期限化
 
 ---
 
 ## 技術メモ
 
-### Resend vs Gmail API 比較
+### Resend vs Gmail API 比較（採用検討時）
 
 #### 費用
 
@@ -131,28 +136,33 @@ https://know-pilates-7oayuf6i9-yks-projects-a2d094d9.vercel.app
 | **分析機能** | Pro以上で開封・クリック追跡 | なし |
 | **到達率** | 高（専用インフラ） | 高（Google署名） |
 
-### 推奨
+### 採用結果
 
-**このプロジェクト（小規模ピラティススタジオ）の場合:**
+**Gmail API を採用**
 
-| 選択肢 | メリット | デメリット |
-|--------|----------|------------|
-| **Resend（現在実装）** | 実装済み、シンプル、スケール可能 | カスタムドメイン必要、無料枠小さめ |
-| **Gmail API** | 無料で十分、既存インフラ活用 | OAuth実装が複雑、トークン管理必要 |
+理由:
+- 月20-30人規模ならGmail APIで十分
+- カスタムドメイン取得不要
+- 将来サービス用Gmailに切り替え予定
 
-**結論**: 月の予約が30件以下なら**Gmail API**で十分。成長を見越すなら**Resend**のまま。
+### Gmail OAuth トークンの注意点
 
-### Gmail API実装時の追加作業
-1. OAuth同意画面の設定（公開審査が必要な場合あり）
-2. リフレッシュトークンの取得・保存
-3. トークン自動更新ロジック
-4. Base64エンコードでのメール本文構築
-5. サービスアカウントの場合はドメイン全体の委任が必要
+1. **テスト中の同意画面**: リフレッシュトークンは7日で期限切れ
+2. **期限切れ時**: OAuth Playgroundで再取得 → Vercel環境変数更新
+3. **本番運用時**: 同意画面を「公開」にすれば無期限（Google審査あり）
+
+### OAuth設定手順（リフレッシュトークン再取得用）
+
+1. [OAuth 2.0 Playground](https://developers.google.com/oauthplayground) を開く
+2. 歯車アイコン → Use your own OAuth credentials にチェック
+3. Client ID/Secret を入力
+4. Gmail API v1 → `gmail.send` スコープを選択
+5. Authorize APIs → Googleアカウントでログイン
+6. Exchange authorization code for tokens
+7. Refresh token をコピー → Vercel環境変数を更新
 
 ### 参考リンク
 - [Resend Pricing](https://resend.com/pricing)
 - [Resend Free Tier](https://resend.com/blog/new-free-tier)
 - [Gmail API Usage Limits](https://developers.google.com/workspace/gmail/api/reference/quota)
 - [Gmail Sending Limits](https://support.google.com/a/answer/166852?hl=en)
-
-現在はResendを実装済み。Gmail APIに切り替える場合は`src/lib/email/index.ts`を書き換える。
