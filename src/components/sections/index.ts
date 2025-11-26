@@ -1,0 +1,10 @@
+export { Hero } from "./Hero";
+export { Features } from "./Features";
+export { Problems } from "./Problems";
+export { Benefits } from "./Benefits";
+export { Instructor } from "./Instructor";
+export { Pricing } from "./Pricing";
+export { Gallery } from "./Gallery";
+export { Access } from "./Access";
+export { Faq } from "./Faq";
+export { Reservation } from "./Reservation";
