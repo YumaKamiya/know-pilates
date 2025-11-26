@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { SectionTitle } from "@/components/ui";
+import { ReservationForm } from "@/components/reservation";
 import { ctaContent } from "@/data/content";
 
 export function Reservation() {
@@ -8,31 +8,18 @@ export function Reservation() {
       <div className="max-w-4xl mx-auto px-4 md:px-8">
         <SectionTitle title={ctaContent.title} subtitle={ctaContent.description} />
 
-        {/* Reservation CTA */}
-        <div className="bg-gradient-to-br from-primary-100 to-accent-50 rounded-2xl p-8 md:p-12 text-center">
-          <div className="max-w-lg mx-auto">
-            <h3 className="font-serif text-2xl md:text-3xl font-semibold text-primary-800 mb-4">
-              体験レッスン
-            </h3>
-            <p className="text-4xl md:text-5xl font-bold text-accent-600 mb-2">
-              3,000
-              <span className="text-xl font-normal text-neutral-600">円</span>
-            </p>
-            <p className="text-neutral-600 mb-8">
-              60分のプライベートレッスン（カウンセリング込み）
-            </p>
-
-            {/* Phase 1: 仮ボタン - Phase 2で予約システム実装 */}
-            <Link
-              href="mailto:info@know-pilates.jp?subject=体験レッスンのご予約"
-              className="inline-flex items-center justify-center w-full md:w-auto min-h-[56px] px-12 py-4 bg-accent-500 text-white text-xl font-semibold rounded-xl hover:bg-accent-600 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              {ctaContent.buttonText}
-            </Link>
-
-            <p className="mt-6 text-sm text-neutral-500">
-              ※ 現在メールでのご予約を受け付けております
-            </p>
+        {/* Reservation Form */}
+        <div className="bg-gradient-to-br from-primary-100 to-accent-50 rounded-2xl p-6 md:p-12">
+          <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm">
+            <div className="text-center mb-8">
+              <h3 className="font-serif text-2xl md:text-3xl font-semibold text-primary-800 mb-2">
+                体験レッスン予約
+              </h3>
+              <p className="text-accent-600 font-bold text-xl">
+                3,000円 <span className="text-sm font-normal text-neutral-600">（50分）</span>
+              </p>
+            </div>
+            <ReservationForm />
           </div>
         </div>
 
