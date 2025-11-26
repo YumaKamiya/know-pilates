@@ -105,11 +105,14 @@ export async function createBooking(data: BookingData): Promise<string> {
   const calendar = getCalendarClient();
 
   const [hours, minutes] = data.time.split(":").map(Number);
-  const startDate = parse(data.date, "yyyy-MM-dd", new Date());
-  const startDateTime = setMinutes(setHours(startDate, hours), minutes);
-  const endDateTime = new Date(
-    startDateTime.getTime() + LESSON_DURATION_MINUTES * 60 * 1000
-  );
+
+  // 開始時刻と終了時刻をJST形式で構築
+  const startDateTimeStr = `${data.date}T${data.time}:00`;
+
+  // 終了時刻を計算（分を加算）
+  const endHours = hours + Math.floor((minutes + LESSON_DURATION_MINUTES) / 60);
+  const endMinutes = (minutes + LESSON_DURATION_MINUTES) % 60;
+  const endDateTimeStr = `${data.date}T${String(endHours).padStart(2, "0")}:${String(endMinutes).padStart(2, "0")}:00`;
 
   try {
     const response = await calendar.events.insert({
@@ -123,11 +126,11 @@ export async function createBooking(data: BookingData): Promise<string> {
 メッセージ: ${data.message || "なし"}
         `.trim(),
         start: {
-          dateTime: startDateTime.toISOString(),
+          dateTime: startDateTimeStr,
           timeZone: TIMEZONE,
         },
         end: {
-          dateTime: endDateTime.toISOString(),
+          dateTime: endDateTimeStr,
           timeZone: TIMEZONE,
         },
       },
