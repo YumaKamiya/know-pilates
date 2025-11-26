@@ -1,8 +1,7 @@
-import { Resend } from "resend";
+import { google } from "googleapis";
 
 const STUDIO_NAME = process.env.STUDIO_NAME || "know（ノウ）";
 const STUDIO_EMAIL = process.env.STUDIO_EMAIL || "info@know-pilates.jp";
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
 interface ReservationEmailData {
   name: string;
@@ -11,6 +10,68 @@ interface ReservationEmailData {
   date: string;
   time: string;
   message?: string;
+}
+
+function getGmailClient() {
+  const clientId = process.env.GMAIL_CLIENT_ID;
+  const clientSecret = process.env.GMAIL_CLIENT_SECRET;
+  const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
+
+  if (!clientId || !clientSecret || !refreshToken) {
+    return null;
+  }
+
+  const oauth2Client = new google.auth.OAuth2(
+    clientId,
+    clientSecret,
+    "https://developers.google.com/oauthplayground"
+  );
+
+  oauth2Client.setCredentials({
+    refresh_token: refreshToken,
+  });
+
+  return google.gmail({ version: "v1", auth: oauth2Client });
+}
+
+function createMimeMessage(to: string, subject: string, html: string): string {
+  const boundary = "boundary_" + Date.now().toString(16);
+
+  const message = [
+    `MIME-Version: 1.0`,
+    `To: ${to}`,
+    `Subject: =?UTF-8?B?${Buffer.from(subject).toString("base64")}?=`,
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    ``,
+    `--${boundary}`,
+    `Content-Type: text/html; charset=UTF-8`,
+    `Content-Transfer-Encoding: base64`,
+    ``,
+    Buffer.from(html).toString("base64"),
+    `--${boundary}--`,
+  ].join("\r\n");
+
+  return Buffer.from(message)
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+}
+
+async function sendEmail(to: string, subject: string, html: string) {
+  const gmail = getGmailClient();
+  if (!gmail) {
+    throw new Error("Gmail client not configured");
+  }
+
+  const raw = createMimeMessage(to, subject, html);
+
+  return gmail.users.messages.send({
+    userId: "me",
+    requestBody: {
+      raw,
+    },
+  });
 }
 
 function getCustomerConfirmationHtml(data: ReservationEmailData): string {
@@ -139,38 +200,39 @@ function getStudioNotificationHtml(data: ReservationEmailData): string {
 }
 
 export async function sendReservationEmails(data: ReservationEmailData) {
-  const apiKey = process.env.RESEND_API_KEY;
+  const gmail = getGmailClient();
 
-  // Resend APIキーが設定されていない場合はスキップ
-  if (!apiKey) {
-    console.log("RESEND_API_KEY not set, skipping email notifications");
+  // Gmail APIが設定されていない場合はスキップ
+  if (!gmail) {
+    console.log("Gmail API not configured, skipping email notifications");
     return { skipped: true };
   }
 
-  const resend = new Resend(apiKey);
+  try {
+    const results = await Promise.allSettled([
+      // お客様への確認メール
+      sendEmail(
+        data.email,
+        `【${STUDIO_NAME}】体験レッスンのご予約確認`,
+        getCustomerConfirmationHtml(data)
+      ),
+      // スタジオへの通知メール
+      sendEmail(
+        STUDIO_EMAIL,
+        `【新規予約】${data.date} ${data.time} - ${data.name}様`,
+        getStudioNotificationHtml(data)
+      ),
+    ]);
 
-  const results = await Promise.allSettled([
-    // お客様への確認メール
-    resend.emails.send({
-      from: `${STUDIO_NAME} <${FROM_EMAIL}>`,
-      to: data.email,
-      subject: `【${STUDIO_NAME}】体験レッスンのご予約確認`,
-      html: getCustomerConfirmationHtml(data),
-    }),
-    // スタジオへの通知メール
-    resend.emails.send({
-      from: `${STUDIO_NAME} 予約システム <${FROM_EMAIL}>`,
-      to: STUDIO_EMAIL,
-      subject: `【新規予約】${data.date} ${data.time} - ${data.name}様`,
-      html: getStudioNotificationHtml(data),
-    }),
-  ]);
+    const customerResult = results[0];
+    const studioResult = results[1];
 
-  const customerResult = results[0];
-  const studioResult = results[1];
-
-  return {
-    customer: customerResult.status === "fulfilled" ? customerResult.value : customerResult.reason,
-    studio: studioResult.status === "fulfilled" ? studioResult.value : studioResult.reason,
-  };
+    return {
+      customer: customerResult.status === "fulfilled" ? customerResult.value : customerResult.reason,
+      studio: studioResult.status === "fulfilled" ? studioResult.value : studioResult.reason,
+    };
+  } catch (error) {
+    console.error("Failed to send emails:", error);
+    throw error;
+  }
 }
