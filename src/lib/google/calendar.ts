@@ -100,6 +100,94 @@ export async function getAvailableSlots(dateStr: string): Promise<TimeSlot[]> {
   }
 }
 
+// カレンダーイベント作成（汎用）
+export interface CalendarEventData {
+  summary: string;
+  start: Date;
+  end: Date;
+  description?: string;
+}
+
+export async function createCalendarEvent(data: CalendarEventData): Promise<{ id: string }> {
+  const calendar = getCalendarClient();
+
+  const startDateTimeStr = format(data.start, "yyyy-MM-dd'T'HH:mm:ss");
+  const endDateTimeStr = format(data.end, "yyyy-MM-dd'T'HH:mm:ss");
+
+  try {
+    const response = await calendar.events.insert({
+      calendarId: CALENDAR_ID,
+      requestBody: {
+        summary: data.summary,
+        description: data.description,
+        start: {
+          dateTime: startDateTimeStr,
+          timeZone: TIMEZONE,
+        },
+        end: {
+          dateTime: endDateTimeStr,
+          timeZone: TIMEZONE,
+        },
+      },
+    });
+
+    return { id: response.data.id || '' };
+  } catch (error) {
+    console.error('Error creating calendar event:', error);
+    throw error;
+  }
+}
+
+// カレンダーイベント削除
+export async function deleteCalendarEvent(eventId: string): Promise<void> {
+  const calendar = getCalendarClient();
+
+  try {
+    await calendar.events.delete({
+      calendarId: CALENDAR_ID,
+      eventId,
+    });
+  } catch (error) {
+    console.error('Error deleting calendar event:', error);
+    throw error;
+  }
+}
+
+// カレンダーイベント更新
+export async function updateCalendarEvent(
+  eventId: string,
+  data: Partial<CalendarEventData>
+): Promise<void> {
+  const calendar = getCalendarClient();
+
+  const updateData: Record<string, unknown> = {};
+  if (data.summary) updateData.summary = data.summary;
+  if (data.description) updateData.description = data.description;
+  if (data.start) {
+    updateData.start = {
+      dateTime: format(data.start, "yyyy-MM-dd'T'HH:mm:ss"),
+      timeZone: TIMEZONE,
+    };
+  }
+  if (data.end) {
+    updateData.end = {
+      dateTime: format(data.end, "yyyy-MM-dd'T'HH:mm:ss"),
+      timeZone: TIMEZONE,
+    };
+  }
+
+  try {
+    await calendar.events.patch({
+      calendarId: CALENDAR_ID,
+      eventId,
+      requestBody: updateData,
+    });
+  } catch (error) {
+    console.error('Error updating calendar event:', error);
+    throw error;
+  }
+}
+
 // 予約を作成
 export async function createBooking(data: BookingData): Promise<string> {
   const calendar = getCalendarClient();

@@ -199,6 +199,142 @@ function getStudioNotificationHtml(data: ReservationEmailData): string {
   `;
 }
 
+// 招待メール用HTMLテンプレート
+function getInvitationEmailHtml(inviteUrl: string): string {
+  return `
+    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+      <h1 style="color: #5c6b5c; border-bottom: 2px solid #b5a289; padding-bottom: 10px;">
+        ${STUDIO_NAME}へようこそ
+      </h1>
+
+      <p style="font-size: 16px; color: #333;">
+        ${STUDIO_NAME}の会員登録にご招待されました。
+      </p>
+
+      <p style="font-size: 14px; color: #666;">
+        以下のボタンをクリックして、会員登録を完了してください。
+      </p>
+
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${inviteUrl}"
+           style="display: inline-block; background: #5c6b5c; color: white;
+                  padding: 15px 30px; text-decoration: none; border-radius: 8px;
+                  font-weight: bold;">
+          会員登録を完了する
+        </a>
+      </div>
+
+      <div style="background: #fff8e6; padding: 15px; border-radius: 8px;
+                  margin: 20px 0; border-left: 4px solid #b5a289;">
+        <p style="font-size: 14px; color: #666; margin: 0;">
+          <strong>ご注意:</strong> このリンクの有効期限は7日間です。
+        </p>
+      </div>
+
+      <p style="font-size: 12px; color: #999; margin-top: 30px;">
+        このメールに心当たりがない場合は、無視してください。
+      </p>
+
+      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+        <p style="font-size: 14px; color: #666;">
+          <strong>${STUDIO_NAME}</strong><br>
+          ${STUDIO_EMAIL}
+        </p>
+      </div>
+    </div>
+  `;
+}
+
+// 登録完了メール用HTMLテンプレート
+function getWelcomeEmailHtml(name: string, loginUrl: string): string {
+  return `
+    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+      <h1 style="color: #5c6b5c; border-bottom: 2px solid #b5a289; padding-bottom: 10px;">
+        会員登録完了
+      </h1>
+
+      <p style="font-size: 16px; color: #333;">
+        ${name} 様
+      </p>
+
+      <p style="font-size: 14px; color: #666;">
+        ${STUDIO_NAME}の会員登録が完了しました。
+      </p>
+
+      <p style="font-size: 14px; color: #666;">
+        レッスンのご予約には、スタジオにてプランまたはチケットの
+        ご購入が必要です。お気軽にお問い合わせください。
+      </p>
+
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${loginUrl}"
+           style="display: inline-block; background: #5c6b5c; color: white;
+                  padding: 15px 30px; text-decoration: none; border-radius: 8px;
+                  font-weight: bold;">
+          ログインする
+        </a>
+      </div>
+
+      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+        <p style="font-size: 14px; color: #666;">
+          <strong>${STUDIO_NAME}</strong><br>
+          ${STUDIO_EMAIL}
+        </p>
+      </div>
+    </div>
+  `;
+}
+
+// 招待メール送信
+export async function sendInvitationEmail(email: string, token: string): Promise<{ success: boolean; error?: string }> {
+  const gmail = getGmailClient();
+
+  if (!gmail) {
+    console.log("Gmail API not configured, skipping invitation email");
+    return { success: false, error: "Gmail APIが設定されていません" };
+  }
+
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  const inviteUrl = `${baseUrl}/member/register/invitation?token=${token}`;
+
+  try {
+    await sendEmail(
+      email,
+      `【${STUDIO_NAME}】会員登録のご案内`,
+      getInvitationEmailHtml(inviteUrl)
+    );
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to send invitation email:", error);
+    return { success: false, error: "メール送信に失敗しました" };
+  }
+}
+
+// 登録完了メール送信
+export async function sendWelcomeEmail(email: string, name: string): Promise<{ success: boolean; error?: string }> {
+  const gmail = getGmailClient();
+
+  if (!gmail) {
+    console.log("Gmail API not configured, skipping welcome email");
+    return { success: false, error: "Gmail APIが設定されていません" };
+  }
+
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  const loginUrl = `${baseUrl}/member/login`;
+
+  try {
+    await sendEmail(
+      email,
+      `【${STUDIO_NAME}】会員登録完了`,
+      getWelcomeEmailHtml(name, loginUrl)
+    );
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to send welcome email:", error);
+    return { success: false, error: "メール送信に失敗しました" };
+  }
+}
+
 export async function sendReservationEmails(data: ReservationEmailData) {
   const gmail = getGmailClient();
 

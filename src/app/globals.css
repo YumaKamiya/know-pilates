@@ -161,3 +161,30 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Safe area for iPhone notch/home indicator */
+.safe-area-pt {
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* タップターゲット最小サイズ */
+.tap-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* テキストリンクにも適用 */
+.tap-target-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  margin: -8px -12px;
+}
