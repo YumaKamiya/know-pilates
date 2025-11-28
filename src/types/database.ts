@@ -54,6 +54,7 @@ export type Database = {
           tickets_per_month: number;
           price: number | null;
           is_active: boolean;
+          type: 'monthly' | 'ticket';
           created_at: string;
         };
         Insert: {
@@ -62,6 +63,7 @@ export type Database = {
           tickets_per_month: number;
           price?: number | null;
           is_active?: boolean;
+          type?: 'monthly' | 'ticket';
           created_at?: string;
         };
         Update: {
@@ -70,6 +72,7 @@ export type Database = {
           tickets_per_month?: number;
           price?: number | null;
           is_active?: boolean;
+          type?: 'monthly' | 'ticket';
           created_at?: string;
         };
       };
@@ -183,6 +186,7 @@ export type Database = {
           amount: number;
           reason: string | null;
           reservation_id: string | null;
+          expires_at: string | null;
           created_at: string;
         };
         Insert: {
@@ -192,6 +196,7 @@ export type Database = {
           amount: number;
           reason?: string | null;
           reservation_id?: string | null;
+          expires_at?: string | null;
           created_at?: string;
         };
         Update: {
@@ -201,6 +206,7 @@ export type Database = {
           amount?: number;
           reason?: string | null;
           reservation_id?: string | null;
+          expires_at?: string | null;
           created_at?: string;
         };
       };
@@ -248,6 +254,31 @@ export type Database = {
         Row: {
           member_id: string;
           balance: number;
+        };
+      };
+      member_ticket_balance_valid: {
+        Row: {
+          member_id: string;
+          balance: number;
+          nearest_expiry: string | null;
+        };
+      };
+      member_reservation_availability: {
+        Row: {
+          member_id: string;
+          member_name: string;
+          member_plan_id: string | null;
+          plan_id: string | null;
+          plan_name: string | null;
+          plan_type: 'monthly' | 'ticket' | null;
+          tickets_per_month: number | null;
+          current_month_reservations: number;
+          current_month_remaining: number | null;
+          next_month_reservations: number;
+          next_month_remaining: number | null;
+          ticket_balance: number;
+          ticket_expiry: string | null;
+          pending_reservations: number;
         };
       };
     };

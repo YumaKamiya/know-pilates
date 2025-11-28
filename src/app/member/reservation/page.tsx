@@ -15,6 +15,13 @@ interface Slot {
 interface MemberInfo {
   id: string;
   ticketBalance: number;
+  // 月プラン情報
+  planType: 'monthly' | 'ticket' | 'none';
+  planName?: string;
+  currentMonthRemaining?: number;
+  currentMonthReservations?: number;
+  ticketsPerMonth?: number;
+  nextMonthRemaining?: number;
 }
 
 export default function ReservationPage() {
@@ -47,19 +54,36 @@ export default function ReservationPage() {
       const member = memberData as { id: string } | null;
 
       if (member) {
-        // チケット残高を取得
-        const { data: balanceData } = await supabase
-          .from('member_ticket_balance')
-          .select('balance')
+        // 予約可能状況を取得（月プラン残数 or 回数券残数）
+        const { data: availabilityData } = await supabase
+          .from('member_reservation_availability')
+          .select('*')
           .eq('member_id', member.id)
           .single();
 
-        const balance = balanceData as { balance: number } | null;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const availability = availabilityData as any;
 
-        setMemberInfo({
-          id: member.id,
-          ticketBalance: balance?.balance || 0,
-        });
+        if (availability) {
+          const planType = availability.plan_type || 'none';
+          setMemberInfo({
+            id: member.id,
+            ticketBalance: availability.ticket_balance || 0,
+            planType: planType as 'monthly' | 'ticket' | 'none',
+            planName: availability.plan_name,
+            currentMonthRemaining: availability.current_month_remaining,
+            currentMonthReservations: availability.current_month_reservations,
+            ticketsPerMonth: availability.tickets_per_month,
+            nextMonthRemaining: availability.next_month_remaining,
+          });
+        } else {
+          // ビューにデータがない場合（プランなし、回数券なし）
+          setMemberInfo({
+            id: member.id,
+            ticketBalance: 0,
+            planType: 'none',
+          });
+        }
       }
 
       setLoading(false);
@@ -137,19 +161,29 @@ export default function ReservationPage() {
 
       setSlots(newSlots || []);
 
-      // チケット残高を更新
-      const { data: balanceData } = await supabase
-        .from('member_ticket_balance')
-        .select('balance')
+      // 予約可能状況を再取得
+      const { data: availabilityData } = await supabase
+        .from('member_reservation_availability')
+        .select('*')
         .eq('member_id', memberInfo.id)
         .single();
 
-      const balance = balanceData as { balance: number } | null;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const availability = availabilityData as any;
 
-      setMemberInfo({
-        ...memberInfo,
-        ticketBalance: balance?.balance || 0,
-      });
+      if (availability) {
+        const planType = availability.plan_type || 'none';
+        setMemberInfo({
+          ...memberInfo,
+          ticketBalance: availability.ticket_balance || 0,
+          planType: planType as 'monthly' | 'ticket' | 'none',
+          planName: availability.plan_name,
+          currentMonthRemaining: availability.current_month_remaining,
+          currentMonthReservations: availability.current_month_reservations,
+          ticketsPerMonth: availability.tickets_per_month,
+          nextMonthRemaining: availability.next_month_remaining,
+        });
+      }
     } catch (error) {
       setMessage({
         type: 'error',
@@ -221,7 +255,16 @@ export default function ReservationPage() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900">予約する</h1>
           <div className="bg-primary-100 text-primary-700 px-4 py-2 rounded-lg text-sm sm:text-base">
-            チケット残高: <span className="font-bold">{memberInfo?.ticketBalance || 0}</span> 枚
+            {memberInfo?.planType === 'monthly' ? (
+              <>
+                今月の残り: <span className="font-bold">{memberInfo.currentMonthRemaining ?? 0}</span> / {memberInfo.ticketsPerMonth ?? 0}回
+                {memberInfo.planName && <span className="ml-2 text-xs">({memberInfo.planName})</span>}
+              </>
+            ) : (
+              <>
+                チケット残高: <span className="font-bold">{memberInfo?.ticketBalance || 0}</span> 枚
+              </>
+            )}
           </div>
         </div>
 
@@ -246,7 +289,11 @@ export default function ReservationPage() {
               // MobileCalendarの日付変更に合わせてselectedDateを更新し、データ再取得をトリガー
               setSelectedDate(start);
             }}
-            disabled={(memberInfo?.ticketBalance || 0) <= 0}
+            disabled={
+              memberInfo?.planType === 'monthly'
+                ? (memberInfo.currentMonthRemaining ?? 0) <= 0
+                : (memberInfo?.ticketBalance || 0) <= 0
+            }
           />
         </div>
 
@@ -305,7 +352,12 @@ export default function ReservationPage() {
                         <button
                           key={slot.id}
                           onClick={() => setConfirmingSlot(slot)}
-                          disabled={isPast || (memberInfo?.ticketBalance || 0) <= 0}
+                          disabled={
+                            isPast ||
+                            (memberInfo?.planType === 'monthly'
+                              ? (memberInfo.currentMonthRemaining ?? 0) <= 0
+                              : (memberInfo?.ticketBalance || 0) <= 0)
+                          }
                           className="w-full px-2 py-2 min-h-[44px] text-sm bg-primary-100 text-primary-700 rounded hover:bg-primary-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {formatTime(slot.start_at)}
@@ -338,16 +390,27 @@ export default function ReservationPage() {
                     {formatTime(confirmingSlot.start_at)} - {formatTime(confirmingSlot.end_at)}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-500">消費チケット</span>
-                  <span className="font-medium">1枚</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-500">残りチケット</span>
-                  <span className="font-medium">
-                    {memberInfo?.ticketBalance || 0} → {(memberInfo?.ticketBalance || 0) - 1}枚
-                  </span>
-                </div>
+                {memberInfo?.planType === 'monthly' ? (
+                  <div className="flex justify-between">
+                    <span className="text-gray-500">今月の残り</span>
+                    <span className="font-medium">
+                      {memberInfo.currentMonthRemaining ?? 0}回 → {(memberInfo.currentMonthRemaining ?? 0) - 1}回
+                    </span>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">消費チケット</span>
+                      <span className="font-medium">1枚</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">残りチケット</span>
+                      <span className="font-medium">
+                        {memberInfo?.ticketBalance || 0} → {(memberInfo?.ticketBalance || 0) - 1}枚
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="flex gap-3">
                 <button

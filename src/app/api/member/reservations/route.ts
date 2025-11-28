@@ -12,7 +12,7 @@ function getAdminClient() {
   );
 }
 
-// 予約作成（チケット消費）
+// 予約作成（月プラン: カウント制 / 回数券: チケット消費）
 export async function POST(request: NextRequest) {
   const supabase = await createServerClient();
 
@@ -45,34 +45,47 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: '権限がありません' }, { status: 403 });
   }
 
-  // チケット残高確認
-  const { data: balance } = await adminClient
-    .from('member_ticket_balance')
-    .select('balance')
-    .eq('member_id', memberId)
-    .single();
-
-  const currentBalance = balance?.balance || 0;
-  if (currentBalance < 1) {
-    return NextResponse.json({ error: 'チケットが不足しています' }, { status: 400 });
-  }
-
-  // スロットの状態確認（楽観的ロック）
-  const { data: slot, error: slotError } = await adminClient
+  // スロット情報を先に取得（予約可能チェックに必要）
+  const { data: slotInfo, error: slotInfoError } = await adminClient
     .from('slots')
     .select('id, status, start_at, end_at, google_calendar_event_id')
     .eq('id', slotId)
-    .eq('status', 'available')
     .single();
 
-  if (slotError || !slot) {
+  if (slotInfoError || !slotInfo) {
+    return NextResponse.json({ error: 'スロットが見つかりません' }, { status: 404 });
+  }
+
+  // 予約可能かチェック（DB関数を使用）
+  const { data: canReserve, error: checkError } = await adminClient
+    .rpc('can_make_reservation', {
+      p_member_id: memberId,
+      p_slot_start_at: slotInfo.start_at,
+    });
+
+  if (checkError) {
+    console.error('予約可能チェックエラー:', checkError);
+    return NextResponse.json({ error: '予約可能チェックに失敗しました' }, { status: 500 });
+  }
+
+  const checkResult = canReserve?.[0];
+  if (!checkResult?.can_reserve) {
+    return NextResponse.json({ error: checkResult?.reason || '予約できません' }, { status: 400 });
+  }
+
+  const planType = checkResult.plan_type; // 'monthly', 'ticket', 'none'
+
+  // スロットの状態確認（楽観的ロック）- 既に取得済みのslotInfoを使用
+  if (slotInfo.status !== 'available') {
     return NextResponse.json({ error: 'この枠はすでに予約されています' }, { status: 409 });
   }
 
   // 過去の枠でないか確認
-  if (new Date(slot.start_at) < new Date()) {
+  if (new Date(slotInfo.start_at) < new Date()) {
     return NextResponse.json({ error: '過去の枠は予約できません' }, { status: 400 });
   }
+
+  const slot = slotInfo;
 
   // トランザクション的に処理
   // 1. スロットを予約済みに更新（楽観的ロック + 更新件数チェック）
@@ -115,29 +128,32 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: '予約の作成に失敗しました' }, { status: 500 });
   }
 
-  // 3. チケットを消費
-  const { error: ticketError } = await adminClient
-    .from('ticket_logs')
-    .insert({
-      member_id: memberId,
-      type: 'consume',
-      amount: -1,
-      reason: '予約消費',
-      reservation_id: reservation.id,
-    });
+  // 3. チケットを消費（回数券の場合のみ）
+  // 月プランの場合はチケット消費不要（予約数カウントのみ）
+  if (planType === 'ticket') {
+    const { error: ticketError } = await adminClient
+      .from('ticket_logs')
+      .insert({
+        member_id: memberId,
+        type: 'consume',
+        amount: -1,
+        reason: '予約消費',
+        reservation_id: reservation.id,
+      });
 
-  if (ticketError) {
-    // ロールバック: 予約とスロットを元に戻す
-    await adminClient
-      .from('reservations')
-      .delete()
-      .eq('id', reservation.id);
-    await adminClient
-      .from('slots')
-      .update({ status: 'available' })
-      .eq('id', slotId);
+    if (ticketError) {
+      // ロールバック: 予約とスロットを元に戻す
+      await adminClient
+        .from('reservations')
+        .delete()
+        .eq('id', reservation.id);
+      await adminClient
+        .from('slots')
+        .update({ status: 'available' })
+        .eq('id', slotId);
 
-    return NextResponse.json({ error: 'チケットの消費に失敗しました' }, { status: 500 });
+      return NextResponse.json({ error: 'チケットの消費に失敗しました' }, { status: 500 });
+    }
   }
 
   // 4. Google Calendar同期（エラーでも予約は成功とする）
