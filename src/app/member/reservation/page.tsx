@@ -242,7 +242,7 @@ export default function ReservationPage() {
     return (
       <MemberLayout>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-500">読み込み中...</div>
+          <div className="text-neutral-500">読み込み中...</div>
         </div>
       </MemberLayout>
     );
@@ -253,7 +253,7 @@ export default function ReservationPage() {
       <div className="max-w-6xl mx-auto">
         {/* ヘッダー */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">予約する</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">レッスンを予約する</h1>
           <div className="bg-primary-100 text-primary-700 px-4 py-2 rounded-lg text-sm sm:text-base">
             {memberInfo?.planType === 'monthly' ? (
               <>
@@ -262,7 +262,7 @@ export default function ReservationPage() {
               </>
             ) : (
               <>
-                チケット残高: <span className="font-bold">{memberInfo?.ticketBalance || 0}</span> 枚
+                あなたのチケット: <span className="font-bold">{memberInfo?.ticketBalance || 0}</span> 枚
               </>
             )}
           </div>
@@ -303,16 +303,16 @@ export default function ReservationPage() {
           <div className="flex items-center justify-between mb-6 bg-white rounded-lg shadow px-4 py-3">
             <button
               onClick={() => navigateWeek('prev')}
-              className="px-4 py-2 min-h-[44px] text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+              className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-md transition-colors"
             >
               ← 前の週
             </button>
-            <span className="text-lg font-medium text-gray-900">
+            <span className="text-lg font-medium text-neutral-900">
               {formatDate(getWeekDays()[0])} - {formatDate(getWeekDays()[6])}
             </span>
             <button
               onClick={() => navigateWeek('next')}
-              className="px-4 py-2 min-h-[44px] text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+              className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-md transition-colors"
             >
               次の週 →
             </button>
@@ -334,7 +334,7 @@ export default function ReservationPage() {
                 >
                   <div
                     className={`px-3 py-2 border-b text-center ${
-                      isToday ? 'bg-primary-600 text-white' : 'bg-gray-50'
+                      isToday ? 'bg-primary-600 text-white' : 'bg-neutral-50'
                     }`}
                   >
                     <div className="text-xs">
@@ -344,8 +344,8 @@ export default function ReservationPage() {
                   </div>
                   <div className="p-2 space-y-1">
                     {daySlots.length === 0 ? (
-                      <div className="text-center text-gray-400 text-xs py-4">
-                        空き枠なし
+                      <div className="text-center text-neutral-400 text-xs py-4">
+                        空きがありません
                       </div>
                     ) : (
                       daySlots.map((slot) => (
@@ -375,10 +375,10 @@ export default function ReservationPage() {
         {confirmingSlot && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">予約確認</h2>
+              <h2 className="text-xl font-bold text-neutral-900 mb-4">予約確認</h2>
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">日時</span>
+                  <span className="text-neutral-500">日時</span>
                   <span className="font-medium text-right">
                     {new Date(confirmingSlot.start_at).toLocaleDateString('ja-JP', {
                       year: 'numeric',
@@ -392,7 +392,7 @@ export default function ReservationPage() {
                 </div>
                 {memberInfo?.planType === 'monthly' ? (
                   <div className="flex justify-between">
-                    <span className="text-gray-500">今月の残り</span>
+                    <span className="text-neutral-500">今月の残り</span>
                     <span className="font-medium">
                       {memberInfo.currentMonthRemaining ?? 0}回 → {(memberInfo.currentMonthRemaining ?? 0) - 1}回
                     </span>
@@ -400,11 +400,11 @@ export default function ReservationPage() {
                 ) : (
                   <>
                     <div className="flex justify-between">
-                      <span className="text-gray-500">消費チケット</span>
+                      <span className="text-neutral-500">消費チケット</span>
                       <span className="font-medium">1枚</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-500">残りチケット</span>
+                      <span className="text-neutral-500">残りチケット</span>
                       <span className="font-medium">
                         {memberInfo?.ticketBalance || 0} → {(memberInfo?.ticketBalance || 0) - 1}枚
                       </span>
@@ -415,7 +415,7 @@ export default function ReservationPage() {
               <div className="flex gap-3">
                 <button
                   onClick={() => setConfirmingSlot(null)}
-                  className="flex-1 px-4 py-3 min-h-[48px] border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors font-medium"
+                  className="flex-1 px-4 py-3 min-h-[48px] border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 active:bg-neutral-100 transition-colors font-medium"
                 >
                   キャンセル
                 </button>
