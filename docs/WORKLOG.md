@@ -40,6 +40,21 @@
 - **Commit**: 01315c2
 - **次**: Phase 2 - テスト環境構築（Jest + Testing Library）
 
+**Phase 2: テスト環境構築** ✅
+
+- **実施**: Jest 29.7.0 + React Testing Library 16.3.0セットアップ、tickets/reservations APIテスト実装（23ケース）
+- **判断**:
+  - `testEnvironment: 'node'`を採用（Next.js 16のWeb API互換性問題を回避）
+  - Promiseライクなモック設計（メソッドチェーン + 直接await対応）
+  - カバレッジ85.57%達成（目標50%を大幅超過）
+  - テストディレクトリ: `src/tests/` 採用（Codex推奨の`tests/`ではなく）
+- **成果**: Phase 1バグのリグレッション防止基盤確立、CI/CDレディ
+- **技術課題**:
+  - Supabaseモック設計: 複数の`from()`呼び出しに対応するため`mockImplementation`使用
+  - Google Calendar APIエラー時の予約成功をテスト（非同期処理の独立性確認）
+- **Commit**: 8d56171
+- **次**: Phase 3 - ディレクトリ構成整理（Codexレビュー反映）
+
 ---
 
 ## フォーマット
