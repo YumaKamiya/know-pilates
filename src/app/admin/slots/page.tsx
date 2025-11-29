@@ -119,7 +119,7 @@ export default function AdminSlotsPage() {
       <div className="space-y-6">
         {/* ヘッダー */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">予約枠管理</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">予約枠管理</h1>
           <button
             onClick={() => setShowCreateModal(true)}
             className="w-full sm:w-auto px-4 py-3 min-h-[44px] bg-primary-600 text-white rounded-lg hover:bg-primary-700 active:bg-primary-800 transition-colors font-medium"
@@ -129,7 +129,7 @@ export default function AdminSlotsPage() {
         </div>
 
         {loading ? (
-          <div className="bg-white rounded-lg shadow p-8 text-center text-gray-500">
+          <div className="bg-white rounded-lg shadow p-8 text-center text-neutral-500">
             読み込み中...
           </div>
         ) : (
@@ -145,7 +145,7 @@ export default function AdminSlotsPage() {
               <div className="flex items-center justify-between bg-white rounded-lg shadow p-4">
                 <button
                   onClick={() => setCurrentWeek(subWeeks(currentWeek, 1))}
-                  className="px-4 py-2 min-h-[44px] text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
                 >
                   ← 前週
                 </button>
@@ -155,7 +155,7 @@ export default function AdminSlotsPage() {
                 </span>
                 <button
                   onClick={() => setCurrentWeek(addWeeks(currentWeek, 1))}
-                  className="px-4 py-2 min-h-[44px] text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
                 >
                   次週 →
                 </button>
@@ -166,12 +166,12 @@ export default function AdminSlotsPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="bg-gray-50">
-                        <th className="w-16 p-2 text-xs font-medium text-gray-500 border-b">時間</th>
+                      <tr className="bg-neutral-50">
+                        <th className="w-16 p-2 text-xs font-medium text-neutral-500 border-b">時間</th>
                         {weekDays.map((day) => (
-                          <th key={day.toISOString()} className="p-2 text-xs font-medium text-gray-500 border-b min-w-[120px]">
+                          <th key={day.toISOString()} className="p-2 text-xs font-medium text-neutral-500 border-b min-w-[120px]">
                             <div>{format(day, 'E', { locale: ja })}</div>
-                            <div className="text-lg font-bold text-gray-900">{format(day, 'd')}</div>
+                            <div className="text-lg font-bold text-neutral-900">{format(day, 'd')}</div>
                           </th>
                         ))}
                       </tr>
@@ -179,7 +179,7 @@ export default function AdminSlotsPage() {
                     <tbody>
                       {hours.map((hour) => (
                         <tr key={hour} className="border-b">
-                          <td className="p-2 text-xs text-gray-500 text-center border-r">
+                          <td className="p-2 text-xs text-neutral-500 text-center border-r">
                             {hour}:00
                           </td>
                           {weekDays.map((day) => {
@@ -242,33 +242,33 @@ export default function AdminSlotsPage() {
               <h2 className="text-lg font-bold mb-4">予約枠を作成</h2>
               <form onSubmit={handleCreateSlot} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">日付</label>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">日付</label>
                   <input
                     type="date"
                     value={createForm.date}
                     onChange={(e) => setCreateForm({ ...createForm, date: e.target.value })}
-                    className="block w-full px-4 py-3 min-h-[48px] text-base border border-gray-300 rounded-lg"
+                    className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg"
                     required
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">開始時刻</label>
+                    <label className="block text-sm font-medium text-neutral-700 mb-1">開始時刻</label>
                     <input
                       type="time"
                       value={createForm.startTime}
                       onChange={(e) => setCreateForm({ ...createForm, startTime: e.target.value })}
-                      className="block w-full px-4 py-3 min-h-[48px] text-base border border-gray-300 rounded-lg"
+                      className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">終了時刻</label>
+                    <label className="block text-sm font-medium text-neutral-700 mb-1">終了時刻</label>
                     <input
                       type="time"
                       value={createForm.endTime}
                       onChange={(e) => setCreateForm({ ...createForm, endTime: e.target.value })}
-                      className="block w-full px-4 py-3 min-h-[48px] text-base border border-gray-300 rounded-lg"
+                      className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg"
                       required
                     />
                   </div>
@@ -277,7 +277,7 @@ export default function AdminSlotsPage() {
                   <button
                     type="button"
                     onClick={() => setShowCreateModal(false)}
-                    className="flex-1 px-4 py-3 min-h-[48px] text-gray-600 hover:bg-gray-100 active:bg-gray-200 rounded-lg font-medium transition-colors"
+                    className="flex-1 px-4 py-3 min-h-[48px] text-neutral-600 hover:bg-neutral-100 active:bg-gray-200 rounded-lg font-medium transition-colors"
                   >
                     キャンセル
                   </button>
