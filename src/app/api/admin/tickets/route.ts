@@ -54,10 +54,10 @@ export async function POST(request: NextRequest) {
 
   const supabase = getAdminClient();
 
-  // 消費の場合は残高チェック
+  // 消費の場合は残高チェック（有効期限考慮）
   if (type === 'consume') {
     const { data: balance } = await supabase
-      .from('member_ticket_balance')
+      .from('member_ticket_balance_valid')
       .select('balance')
       .eq('member_id', member_id)
       .single();

@@ -139,6 +139,7 @@ export async function POST(request: NextRequest) {
         amount: -1,
         reason: '予約消費',
         reservation_id: reservation.id,
+        expires_at: null, // 現状は無期限（将来的に有効期限設定可能）
       });
 
     if (ticketError) {

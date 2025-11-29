@@ -128,6 +128,7 @@ export async function DELETE(
       amount: 1,
       reason: '予約キャンセル返却',
       reservation_id: id,
+      expires_at: null, // 現状は無期限（将来的に有効期限設定可能）
     });
 
   if (ticketError) {
