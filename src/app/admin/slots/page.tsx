@@ -277,7 +277,7 @@ export default function AdminSlotsPage() {
                   <button
                     type="button"
                     onClick={() => setShowCreateModal(false)}
-                    className="flex-1 px-4 py-3 min-h-[48px] text-neutral-600 hover:bg-neutral-100 active:bg-gray-200 rounded-lg font-medium transition-colors"
+                    className="flex-1 px-4 py-3 min-h-[48px] text-neutral-600 hover:bg-neutral-100 active:bg-neutral-200 rounded-lg font-medium transition-colors"
                   >
                     キャンセル
                   </button>

@@ -211,7 +211,7 @@ export default function MemberDetailPage() {
     const styles: Record<string, string> = {
       active: 'bg-green-100 text-green-800',
       suspended: 'bg-yellow-100 text-yellow-800',
-      withdrawn: 'bg-neutral-100 text-gray-800',
+      withdrawn: 'bg-neutral-100 text-neutral-800',
     };
     const labels: Record<string, string> = {
       active: '有効',
