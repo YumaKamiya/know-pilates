@@ -54,17 +54,17 @@ function InvitationRegisterContent() {
     setError('');
 
     if (password !== passwordConfirm) {
-      setError('パスワードが一致しません');
+      setError('パスワードの入力内容が異なっています');
       return;
     }
 
     if (password.length < 8) {
-      setError('パスワードは8文字以上で入力してください');
+      setError('パスワードは8文字以上でお願いします');
       return;
     }
 
     if (!agreedToTerms) {
-      setError('利用規約への同意が必要です');
+      setError('利用規約のご確認をお願いします');
       return;
     }
 
@@ -97,7 +97,7 @@ function InvitationRegisterContent() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-gray-600">招待を確認中...</p>
+          <p className="mt-4 text-neutral-600">少々お待ちください...</p>
         </div>
       </div>
     );
@@ -122,13 +122,13 @@ function InvitationRegisterContent() {
               />
             </svg>
           </div>
-          <h2 className="text-xl font-bold text-gray-900">
-            {expired ? '招待の有効期限切れ' : '無効な招待リンク'}
+          <h2 className="text-xl font-bold text-neutral-900">
+            {expired ? 'ご招待の期限が切れています' : 'ご招待リンクを確認できませんでした'}
           </h2>
-          <p className="text-gray-600">{error}</p>
+          <p className="text-neutral-600">{error}</p>
           {expired && (
-            <p className="text-sm text-gray-500">
-              スタジオの管理者に連絡して、新しい招待メールを送ってもらってください。
+            <p className="text-sm text-neutral-500">
+              お手数ですが、スタジオへお問い合わせください。新しいご招待をお送りします。
             </p>
           )}
           <Link
@@ -146,11 +146,11 @@ function InvitationRegisterContent() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5 py-12 px-4">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
         <div>
-          <h2 className="text-center text-2xl font-bold text-gray-900">
-            会員登録
+          <h2 className="text-center text-2xl font-bold text-neutral-900">
+            ようこそ
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            know（ノウ）ピラティス 会員登録
+          <p className="mt-2 text-center text-sm text-neutral-600">
+            新しい一歩を踏み出しましょう
           </p>
         </div>
 
@@ -163,20 +163,20 @@ function InvitationRegisterContent() {
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-neutral-700">
                 メールアドレス
               </label>
               <input
                 type="email"
                 value={email}
                 disabled
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500"
+                className="mt-1 block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg bg-neutral-50 text-neutral-500"
               />
-              <p className="mt-1 text-xs text-gray-500">招待されたメールアドレスです</p>
+              <p className="mt-1 text-xs text-neutral-500">ご登録いただくメールアドレスです</p>
             </div>
 
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="name" className="block text-sm font-medium text-neutral-700">
                 お名前 <span className="text-red-500">*</span>
               </label>
               <input
@@ -186,13 +186,13 @@ function InvitationRegisterContent() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                 placeholder="山田 花子"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-neutral-700">
                 パスワード <span className="text-red-500">*</span>
               </label>
               <input
@@ -203,14 +203,14 @@ function InvitationRegisterContent() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                 placeholder="8文字以上"
               />
-              <p className="mt-1 text-xs text-gray-500">8文字以上で入力してください</p>
+              <p className="mt-1 text-xs text-neutral-500">8文字以上でお願いします</p>
             </div>
 
             <div>
-              <label htmlFor="passwordConfirm" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="passwordConfirm" className="block text-sm font-medium text-neutral-700">
                 パスワード（確認） <span className="text-red-500">*</span>
               </label>
               <input
@@ -221,7 +221,7 @@ function InvitationRegisterContent() {
                 required
                 value={passwordConfirm}
                 onChange={(e) => setPasswordConfirm(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
                 placeholder="パスワードを再入力"
               />
             </div>
@@ -233,9 +233,9 @@ function InvitationRegisterContent() {
                 type="checkbox"
                 checked={agreedToTerms}
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
-                className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded mt-1"
+                className="h-4 w-4 text-primary focus:ring-primary border-neutral-300 rounded mt-1"
               />
-              <label htmlFor="agreedToTerms" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="agreedToTerms" className="ml-2 block text-sm text-neutral-700">
                 <span className="text-primary hover:underline cursor-pointer">利用規約</span>
                 に同意します <span className="text-red-500">*</span>
               </label>
@@ -245,7 +245,7 @@ function InvitationRegisterContent() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex justify-center items-center min-h-[48px] px-4 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {submitting ? '登録中...' : '登録する'}
           </button>
@@ -262,7 +262,7 @@ export default function InvitationRegisterPage() {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-gray-600">読み込み中...</p>
+            <p className="mt-4 text-neutral-600">準備中...</p>
           </div>
         </div>
       }

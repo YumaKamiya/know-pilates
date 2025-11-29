@@ -43,31 +43,31 @@ export default function RegisterCompletePage() {
               />
             </svg>
           </div>
-          <h2 className="mt-6 text-2xl font-bold text-gray-900">
-            登録完了
+          <h2 className="mt-6 text-2xl font-bold text-neutral-900">
+            ご登録ありがとうございます
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            会員登録が完了しました
+          <p className="mt-2 text-sm text-neutral-600">
+            登録手続きが完了しました
           </p>
         </div>
 
         <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-left">
-          <h3 className="text-sm font-medium text-amber-800">ご予約について</h3>
+          <h3 className="text-sm font-medium text-amber-800">レッスンご予約の前に</h3>
           <p className="mt-1 text-sm text-amber-700">
-            レッスンのご予約には、スタジオにてプランまたはチケットのご購入が必要です。
-            詳しくはスタジオまでお問い合わせください。
+            レッスンのご予約には、プランまたはチケットのご購入が必要です。
+            ご不明な点はお気軽にスタジオまでお問い合わせください。
           </p>
         </div>
 
         <div className="space-y-3">
-          <p className="text-sm text-gray-500">
-            {countdown}秒後にログインページへ移動します...
+          <p className="text-sm text-neutral-500">
+            あと{countdown}秒でログインページへ移動します...
           </p>
           <Link
             href="/member/login"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
           >
-            今すぐログインページへ
+            すぐにログインする
           </Link>
         </div>
       </div>
