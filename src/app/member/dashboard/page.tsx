@@ -144,7 +144,7 @@ export default function MemberDashboardPage() {
     return (
       <MemberLayout>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-500">読み込み中...</div>
+          <div className="text-neutral-500">読み込み中...</div>
         </div>
       </MemberLayout>
     );
@@ -163,22 +163,22 @@ export default function MemberDashboardPage() {
   return (
     <MemberLayout>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold text-gray-900 mb-8">
+        <h1 className="text-2xl font-bold text-neutral-900 mb-8">
           こんにちは、{memberInfo?.name}さん
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {/* チケット残高 */}
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-sm font-medium text-gray-500 mb-2">チケット残高</h2>
+            <h2 className="text-sm font-medium text-neutral-500 mb-2">あなたのチケット</h2>
             <div className="flex items-baseline">
               <span className="text-4xl font-bold text-primary">
                 {memberInfo?.ticketBalance}
               </span>
-              <span className="ml-2 text-gray-500">枚</span>
+              <span className="ml-2 text-neutral-500">枚</span>
             </div>
             {memberInfo?.currentPlan && (
-              <p className="mt-2 text-sm text-gray-600">
+              <p className="mt-2 text-sm text-neutral-600">
                 {memberInfo.currentPlan.name}（月{memberInfo.currentPlan.ticketsPerMonth}枚）
               </p>
             )}
@@ -186,37 +186,37 @@ export default function MemberDashboardPage() {
 
           {/* 予約ボタン */}
           <div className="bg-gradient-to-br from-primary to-primary/80 rounded-lg shadow p-6 text-white">
-            <h2 className="text-sm font-medium text-white/80 mb-2">レッスンを予約</h2>
+            <h2 className="text-sm font-medium text-white/80 mb-2">レッスンを予約する</h2>
             <p className="text-sm text-white/70 mb-4">
-              空いている日時を選んで予約できます
+              空いている日時を選んで、あなたのレッスンを予約できます
             </p>
             <Link
               href="/member/reservation"
-              className="inline-block bg-white text-primary px-6 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors"
+              className="inline-block bg-white text-primary px-6 py-2 rounded-md font-medium hover:bg-neutral-100 transition-colors"
             >
-              予約する
+              レッスンを予約する
             </Link>
           </div>
         </div>
 
         {/* 今後の予約 */}
         <div className="bg-white rounded-lg shadow">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-medium text-gray-900">今後の予約</h2>
+          <div className="px-6 py-4 border-b border-neutral-200">
+            <h2 className="text-lg font-medium text-neutral-900">ご予約いただいているレッスン</h2>
           </div>
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-neutral-200">
             {memberInfo?.upcomingReservations.length === 0 ? (
-              <div className="px-6 py-8 text-center text-gray-500">
-                予約がありません
+              <div className="px-6 py-8 text-center text-neutral-500">
+                予約されたレッスンはまだありません
               </div>
             ) : (
               memberInfo?.upcomingReservations.map((reservation) => (
                 <div key={reservation.id} className="px-6 py-4 flex items-center justify-between">
                   <div>
-                    <p className="text-gray-900 font-medium">
+                    <p className="text-neutral-900 font-medium">
                       {formatDateTime(reservation.startAt)}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-neutral-500">
                       {new Date(reservation.startAt).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
                       {' - '}
                       {new Date(reservation.endAt).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
@@ -230,7 +230,7 @@ export default function MemberDashboardPage() {
             )}
           </div>
           {memberInfo && memberInfo.upcomingReservations.length > 0 && (
-            <div className="px-6 py-4 border-t border-gray-200">
+            <div className="px-6 py-4 border-t border-neutral-200">
               <Link
                 href="/member/reservations"
                 className="text-primary hover:text-primary/80 text-sm font-medium"

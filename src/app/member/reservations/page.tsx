@@ -91,7 +91,7 @@ export default function ReservationsPage() {
   const getStatusBadge = (reservation: Reservation) => {
     if (reservation.status === 'cancelled') {
       return (
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800">
           キャンセル済み
         </span>
       );
@@ -114,7 +114,7 @@ export default function ReservationsPage() {
     return (
       <MemberLayout>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-500">読み込み中...</div>
+          <div className="text-neutral-500">読み込み中...</div>
         </div>
       </MemberLayout>
     );
@@ -130,7 +130,7 @@ export default function ReservationsPage() {
   return (
     <MemberLayout>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">予約履歴</h1>
+        <h1 className="text-2xl font-bold text-neutral-900 mb-6">あなたの予約履歴</h1>
 
         {message && (
           <div
@@ -146,22 +146,22 @@ export default function ReservationsPage() {
 
         {/* 今後の予約 */}
         <section className="mb-8">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">今後の予約</h2>
+          <h2 className="text-lg font-medium text-neutral-900 mb-4">ご予約いただいているレッスン</h2>
           <div className="bg-white rounded-lg shadow">
             {upcomingReservations.length === 0 ? (
-              <div className="px-6 py-8 text-center text-gray-500">
-                今後の予約はありません
+              <div className="px-6 py-8 text-center text-neutral-500">
+                予約されたレッスンはまだありません
               </div>
             ) : (
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y divide-neutral-200">
                 {upcomingReservations.map((reservation) => (
                   <div key={reservation.id} className="px-6 py-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-gray-900 font-medium">
+                        <p className="text-neutral-900 font-medium">
                           {formatDateTime(reservation.slots.start_at)}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-neutral-500">
                           {new Date(reservation.slots.start_at).toLocaleTimeString('ja-JP', {
                             hour: '2-digit',
                             minute: '2-digit',
@@ -185,7 +185,7 @@ export default function ReservationsPage() {
                           </button>
                         )}
                         {!canCancel(reservation) && reservation.status === 'confirmed' && (
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs text-neutral-400">
                             キャンセル期限切れ
                           </span>
                         )}
@@ -200,22 +200,22 @@ export default function ReservationsPage() {
 
         {/* 過去の予約 */}
         <section>
-          <h2 className="text-lg font-medium text-gray-900 mb-4">過去の予約</h2>
+          <h2 className="text-lg font-medium text-neutral-900 mb-4">これまでのレッスン</h2>
           <div className="bg-white rounded-lg shadow">
             {pastReservations.length === 0 ? (
-              <div className="px-6 py-8 text-center text-gray-500">
-                過去の予約はありません
+              <div className="px-6 py-8 text-center text-neutral-500">
+                レッスン履歴はまだありません
               </div>
             ) : (
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y divide-neutral-200">
                 {pastReservations.map((reservation) => (
                   <div key={reservation.id} className="px-6 py-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-gray-900 font-medium">
+                        <p className="text-neutral-900 font-medium">
                           {formatDateTime(reservation.slots.start_at)}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-neutral-500">
                           {new Date(reservation.slots.start_at).toLocaleTimeString('ja-JP', {
                             hour: '2-digit',
                             minute: '2-digit',
