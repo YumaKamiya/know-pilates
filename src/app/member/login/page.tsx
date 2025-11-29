@@ -24,7 +24,7 @@ export default function MemberLoginPage() {
     });
 
     if (error) {
-      setError('メールアドレスまたはパスワードが正しくありません');
+      setError('メールアドレスまたはパスワードをご確認ください');
       setLoading(false);
       return;
     }
@@ -37,11 +37,11 @@ export default function MemberLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-100/50 to-primary-200/30 px-4 py-8">
       <div className="max-w-md w-full space-y-8 p-6 sm:p-8 bg-white rounded-lg shadow-lg">
         <div>
-          <h2 className="text-center text-xl sm:text-2xl font-bold text-gray-900">
-            会員ログイン
+          <h2 className="text-center text-xl sm:text-2xl font-bold text-neutral-900">
+            おかえりなさい
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            know（ノウ）ピラティス 会員専用ページ
+          <p className="mt-2 text-center text-sm text-neutral-600">
+            いつもありがとうございます
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
@@ -52,7 +52,7 @@ export default function MemberLoginPage() {
           )}
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
                 メールアドレス
               </label>
               <input
@@ -66,11 +66,11 @@ export default function MemberLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="block w-full px-4 py-3 min-h-[48px] text-base border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="password" className="block text-sm font-medium text-neutral-700 mb-1">
                 パスワード
               </label>
               <input
@@ -81,7 +81,7 @@ export default function MemberLoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="block w-full px-4 py-3 min-h-[48px] text-base border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               />
             </div>
           </div>
@@ -93,8 +93,8 @@ export default function MemberLoginPage() {
             {loading ? 'ログイン中...' : 'ログイン'}
           </button>
 
-          <div className="text-center text-sm text-gray-600">
-            アカウントをお持ちでない方は
+          <div className="text-center text-sm text-neutral-600">
+            はじめての方は
             <Link
               href="/member/register"
               className="inline-flex items-center min-h-[44px] px-2 text-primary-600 hover:underline font-medium"
