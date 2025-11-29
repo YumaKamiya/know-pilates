@@ -73,23 +73,23 @@ export default function MobileSlotCalendar({ slots, onDeleteSlot }: MobileSlotCa
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       {/* 日付ナビゲーション */}
-      <div className="flex items-center justify-between px-2 py-3 bg-gray-50 border-b">
+      <div className="flex items-center justify-between px-2 py-3 bg-neutral-50 border-b">
         <button
           onClick={() => navigateDays('prev')}
-          className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-gray-200 active:bg-gray-300 transition-colors"
+          className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-neutral-200 active:bg-neutral-300 transition-colors"
           aria-label="前の3日間"
         >
-          <span className="text-gray-600 text-lg">←</span>
+          <span className="text-neutral-600 text-lg">←</span>
         </button>
-        <span className="font-medium text-gray-900 text-base">
+        <span className="font-medium text-neutral-900 text-base">
           {formatDateRange()}
         </span>
         <button
           onClick={() => navigateDays('next')}
-          className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-gray-200 active:bg-gray-300 transition-colors"
+          className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-neutral-200 active:bg-neutral-300 transition-colors"
           aria-label="次の3日間"
         >
-          <span className="text-gray-600 text-lg">→</span>
+          <span className="text-neutral-600 text-lg">→</span>
         </button>
       </div>
 
@@ -98,16 +98,16 @@ export default function MobileSlotCalendar({ slots, onDeleteSlot }: MobileSlotCa
         <table className="w-full min-w-[300px]">
           <thead>
             <tr>
-              <th className="w-14 p-2 text-xs text-gray-500 border-b bg-white sticky left-0 z-10">
+              <th className="w-14 p-2 text-xs text-neutral-500 border-b bg-white sticky left-0 z-10">
                 時間
               </th>
               {visibleDays.map((day) => (
                 <th key={day.toISOString()} className="p-2 border-b border-l min-w-[90px]">
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-neutral-500">
                     {format(day, 'E', { locale: ja })}
                   </div>
                   <div className={`text-lg font-bold ${
-                    isToday(day) ? 'text-primary-600' : 'text-gray-900'
+                    isToday(day) ? 'text-primary-600' : 'text-neutral-900'
                   }`}>
                     {format(day, 'd')}
                   </div>
@@ -118,7 +118,7 @@ export default function MobileSlotCalendar({ slots, onDeleteSlot }: MobileSlotCa
           <tbody>
             {TIME_SLOTS.map((hour) => (
               <tr key={hour}>
-                <td className="p-2 text-xs text-gray-500 text-center border-r bg-white sticky left-0 z-10">
+                <td className="p-2 text-xs text-neutral-500 text-center border-r bg-white sticky left-0 z-10">
                   {hour}:00
                 </td>
                 {visibleDays.map((day) => {
@@ -164,7 +164,7 @@ export default function MobileSlotCalendar({ slots, onDeleteSlot }: MobileSlotCa
                           );
                         })
                       ) : (
-                        <div className="min-h-[44px] flex items-center justify-center text-gray-300 text-xs">
+                        <div className="min-h-[44px] flex items-center justify-center text-neutral-300 text-xs">
                           -
                         </div>
                       )}
