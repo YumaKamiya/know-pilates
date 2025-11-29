@@ -24,8 +24,8 @@ export default function AdminSidebar() {
   };
 
   return (
-    <div className="flex flex-col w-64 bg-gray-900 min-h-screen">
-      <div className="flex items-center justify-center h-16 bg-gray-800">
+    <div className="flex flex-col w-64 bg-primary-950 min-h-screen">
+      <div className="flex items-center justify-center h-16 bg-primary-900">
         <span className="text-white font-bold text-lg">know 管理画面</span>
       </div>
       <nav className="flex-1 px-2 py-4 space-y-1">
@@ -37,8 +37,8 @@ export default function AdminSidebar() {
               href={item.href}
               className={`flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                 isActive
-                  ? 'bg-gray-800 text-white'
-                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                  ? 'bg-primary-900 text-white'
+                  : 'text-neutral-400 hover:bg-primary-800 hover:text-white'
               }`}
             >
               <span className="mr-3">{item.icon}</span>
@@ -47,10 +47,10 @@ export default function AdminSidebar() {
           );
         })}
       </nav>
-      <div className="px-2 py-4 border-t border-gray-700">
+      <div className="px-2 py-4 border-t border-neutral-700">
         <button
           onClick={handleLogout}
-          className="flex items-center w-full px-4 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white transition-colors"
+          className="flex items-center w-full px-4 py-2 text-sm font-medium text-neutral-400 rounded-md hover:bg-primary-800 hover:text-white transition-colors"
         >
           <span className="mr-3">🚪</span>
           ログアウト
