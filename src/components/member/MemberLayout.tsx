@@ -29,7 +29,7 @@ export default function MemberLayout({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-neutral-50">
       {/* デスクトップ: サイドバー表示 */}
       <div className="hidden md:flex">
         <MemberSidebar />
@@ -65,10 +65,10 @@ export default function MemberLayout({
                   setIsMenuOpen(false);
                   handleLogout();
                 }}
-                className="flex items-center w-full px-4 py-3 text-gray-700 hover:bg-gray-100 min-h-[44px]"
+                className="flex items-center w-full px-4 py-3 text-neutral-700 hover:bg-neutral-100 min-h-[44px]"
               >
                 <span className="mr-3">🚪</span>
-                ログアウト
+                ログアウトする
               </button>
             </div>
           </>

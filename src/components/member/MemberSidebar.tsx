@@ -51,7 +51,7 @@ export default function MemberSidebar() {
           className="flex items-center w-full px-4 py-2 text-sm font-medium text-white/80 rounded-md hover:bg-white/10 hover:text-white transition-colors"
         >
           <span className="mr-3">🚪</span>
-          ログアウト
+          ログアウトする
         </button>
       </div>
     </div>
