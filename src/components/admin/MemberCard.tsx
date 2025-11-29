@@ -30,7 +30,7 @@ export default function MemberCard({ member }: MemberCardProps) {
     const styles: Record<string, string> = {
       active: 'bg-green-100 text-green-800',
       suspended: 'bg-yellow-100 text-yellow-800',
-      withdrawn: 'bg-gray-100 text-gray-800',
+      withdrawn: 'bg-neutral-100 text-neutral-800',
     };
     const labels: Record<string, string> = {
       active: '有効',
@@ -38,7 +38,7 @@ export default function MemberCard({ member }: MemberCardProps) {
       withdrawn: '退会',
     };
     return (
-      <span className={`px-2 py-1 text-xs rounded-full ${styles[status] || 'bg-gray-100'}`}>
+      <span className={`px-2 py-1 text-xs rounded-full ${styles[status] || 'bg-neutral-100'}`}>
         {labels[status] || status}
       </span>
     );
@@ -49,10 +49,10 @@ export default function MemberCard({ member }: MemberCardProps) {
       {/* ヘッダー: 名前とステータス */}
       <div className="flex justify-between items-start mb-3">
         <div className="flex-1 min-w-0">
-          <h3 className="font-bold text-gray-900 truncate">{member.name}</h3>
-          <p className="text-sm text-gray-500 truncate">{member.email}</p>
+          <h3 className="font-bold text-neutral-900 truncate">{member.name}</h3>
+          <p className="text-sm text-neutral-500 truncate">{member.email}</p>
           {member.phone && (
-            <p className="text-sm text-gray-500">{member.phone}</p>
+            <p className="text-sm text-neutral-500">{member.phone}</p>
           )}
         </div>
         <div className="ml-2 flex-shrink-0">
@@ -62,15 +62,15 @@ export default function MemberCard({ member }: MemberCardProps) {
 
       {/* 情報グリッド */}
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-gray-50 rounded-lg p-3">
-          <div className="text-xs text-gray-500 mb-1">プラン</div>
+        <div className="bg-neutral-50 rounded-lg p-3">
+          <div className="text-xs text-neutral-500 mb-1">プラン</div>
           <div className="text-sm font-medium text-primary-700">
             {activePlan ? activePlan.plans.name : '未設定'}
           </div>
         </div>
-        <div className="bg-gray-50 rounded-lg p-3">
-          <div className="text-xs text-gray-500 mb-1">チケット残</div>
-          <div className="text-sm font-bold text-gray-900">{balance}枚</div>
+        <div className="bg-neutral-50 rounded-lg p-3">
+          <div className="text-xs text-neutral-500 mb-1">チケット残</div>
+          <div className="text-sm font-bold text-neutral-900">{balance}枚</div>
         </div>
       </div>
 

@@ -30,7 +30,7 @@ export default function AdminLayout({
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-neutral-100">
       {/* デスクトップ: サイドバー表示 */}
       <div className="hidden md:flex">
         <AdminSidebar />
@@ -40,7 +40,7 @@ export default function AdminLayout({
       {/* モバイル: 固定ヘッダー + ボトムナビ */}
       <div className="md:hidden">
         {/* 固定ヘッダー */}
-        <header className="fixed top-0 left-0 right-0 h-14 bg-gray-900 flex items-center justify-between px-4 z-40 safe-area-pt">
+        <header className="fixed top-0 left-0 right-0 h-14 bg-primary-950 flex items-center justify-between px-4 z-40 safe-area-pt">
           <Link href="/admin/dashboard" className="text-white font-bold text-lg">
             know 管理
           </Link>
@@ -63,7 +63,7 @@ export default function AdminLayout({
             <div className="fixed top-14 right-4 bg-white rounded-lg shadow-lg z-50 py-2 min-w-[160px]">
               <Link
                 href="/admin/reservations"
-                className="flex items-center w-full px-4 py-3 text-gray-700 hover:bg-gray-100 min-h-[44px]"
+                className="flex items-center w-full px-4 py-3 text-neutral-700 hover:bg-neutral-100 min-h-[44px]"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span className="mr-3">📋</span>
@@ -74,7 +74,7 @@ export default function AdminLayout({
                   setIsMenuOpen(false);
                   handleLogout();
                 }}
-                className="flex items-center w-full px-4 py-3 text-gray-700 hover:bg-gray-100 min-h-[44px]"
+                className="flex items-center w-full px-4 py-3 text-neutral-700 hover:bg-neutral-100 min-h-[44px]"
               >
                 <span className="mr-3">🚪</span>
                 ログアウト
@@ -87,7 +87,7 @@ export default function AdminLayout({
         <main className="pt-14 pb-20 px-4">{children}</main>
 
         {/* ボトムナビゲーション */}
-        <BottomNav items={navigation} activeColor="text-gray-900" />
+        <BottomNav items={navigation} activeColor="text-neutral-900" />
       </div>
     </div>
   );

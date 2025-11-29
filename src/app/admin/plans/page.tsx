@@ -111,7 +111,7 @@ export default function AdminPlansPage() {
     <AdminLayout>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">プラン管理</h1>
+          <h1 className="text-2xl font-bold text-neutral-900">プラン管理</h1>
           <button
             onClick={() => setShowCreateModal(true)}
             className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
@@ -123,9 +123,9 @@ export default function AdminPlansPage() {
         {/* プラン一覧 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {loading ? (
-            <div className="col-span-full text-center py-8 text-gray-500">読み込み中...</div>
+            <div className="col-span-full text-center py-8 text-neutral-500">読み込み中...</div>
           ) : plans.length === 0 ? (
-            <div className="col-span-full text-center py-8 text-gray-500">
+            <div className="col-span-full text-center py-8 text-neutral-500">
               プランが登録されていません
             </div>
           ) : (
@@ -137,35 +137,35 @@ export default function AdminPlansPage() {
                 }`}
               >
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-lg font-bold text-gray-900">{plan.name}</h3>
+                  <h3 className="text-lg font-bold text-neutral-900">{plan.name}</h3>
                   <span
                     className={`px-2 py-1 text-xs rounded-full ${
                       plan.is_active
                         ? 'bg-green-100 text-green-800'
-                        : 'bg-gray-100 text-gray-800'
+                        : 'bg-neutral-100 text-neutral-800'
                     }`}
                   >
                     {plan.is_active ? '有効' : '無効'}
                   </span>
                 </div>
-                <div className="space-y-2 text-sm text-gray-600">
+                <div className="space-y-2 text-sm text-neutral-600">
                   <div className="flex justify-between">
                     <span>月間チケット数</span>
-                    <span className="font-medium text-gray-900">{plan.tickets_per_month}枚</span>
+                    <span className="font-medium text-neutral-900">{plan.tickets_per_month}枚</span>
                   </div>
                   {plan.price && (
                     <div className="flex justify-between">
                       <span>月額料金</span>
-                      <span className="font-medium text-gray-900">
+                      <span className="font-medium text-neutral-900">
                         {plan.price.toLocaleString()}円
                       </span>
                     </div>
                   )}
                 </div>
-                <div className="mt-4 pt-4 border-t border-gray-100 flex justify-end space-x-2">
+                <div className="mt-4 pt-4 border-t border-neutral-100 flex justify-end space-x-2">
                   <button
                     onClick={() => handleToggleActive(plan)}
-                    className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded"
+                    className="px-3 py-1 text-sm text-neutral-600 hover:bg-neutral-100 rounded"
                   >
                     {plan.is_active ? '無効化' : '有効化'}
                   </button>
@@ -190,20 +190,20 @@ export default function AdminPlansPage() {
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-neutral-700">
                     プラン名 <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                     placeholder="例: 月4回プラン"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-neutral-700">
                     月間チケット数 <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -212,18 +212,18 @@ export default function AdminPlansPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, tickets_per_month: parseInt(e.target.value) })
                     }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                     min="1"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">月額料金（円）</label>
+                  <label className="block text-sm font-medium text-neutral-700">月額料金（円）</label>
                   <input
                     type="number"
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                     placeholder="例: 15000"
                   />
                 </div>
@@ -231,7 +231,7 @@ export default function AdminPlansPage() {
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md"
+                    className="px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-md"
                   >
                     キャンセル
                   </button>
