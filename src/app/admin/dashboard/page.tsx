@@ -31,7 +31,7 @@ export default async function AdminDashboardPage() {
   return (
     <AdminLayout>
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900">ダッシュボード</h1>
+        <h1 className="text-2xl font-bold text-neutral-900">ダッシュボード</h1>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           {stats.map((stat) => (
@@ -44,10 +44,10 @@ export default async function AdminDashboardPage() {
                   <div className="flex-shrink-0 text-3xl">{stat.icon}</div>
                   <div className="ml-5 w-0 flex-1">
                     <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">
+                      <dt className="text-sm font-medium text-neutral-500 truncate">
                         {stat.name}
                       </dt>
-                      <dd className="text-3xl font-semibold text-gray-900">
+                      <dd className="text-3xl font-semibold text-neutral-900">
                         {stat.value}
                       </dd>
                     </dl>
@@ -59,41 +59,41 @@ export default async function AdminDashboardPage() {
         </div>
 
         <div className="bg-white shadow rounded-lg p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">
+          <h2 className="text-lg font-medium text-neutral-900 mb-4">
             クイックアクション
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <a
               href="/admin/slots"
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
               <div className="text-2xl mb-2">📅</div>
               <div className="font-medium">予約枠を作成</div>
-              <div className="text-sm text-gray-500">新しい予約枠を追加</div>
+              <div className="text-sm text-neutral-500">新しい予約枠を追加</div>
             </a>
             <a
               href="/admin/members"
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
               <div className="text-2xl mb-2">👥</div>
               <div className="font-medium">会員を登録</div>
-              <div className="text-sm text-gray-500">新規会員を追加</div>
+              <div className="text-sm text-neutral-500">新規会員を追加</div>
             </a>
             <a
               href="/admin/reservations"
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
               <div className="text-2xl mb-2">📋</div>
               <div className="font-medium">予約を確認</div>
-              <div className="text-sm text-gray-500">予約一覧を表示</div>
+              <div className="text-sm text-neutral-500">予約一覧を表示</div>
             </a>
             <a
               href="/admin/plans"
-              className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
               <div className="text-2xl mb-2">💳</div>
               <div className="font-medium">プランを管理</div>
-              <div className="text-sm text-gray-500">料金プランを設定</div>
+              <div className="text-sm text-neutral-500">料金プランを設定</div>
             </a>
           </div>
         </div>
