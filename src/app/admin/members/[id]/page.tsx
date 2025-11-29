@@ -211,7 +211,7 @@ export default function MemberDetailPage() {
     const styles: Record<string, string> = {
       active: 'bg-green-100 text-green-800',
       suspended: 'bg-yellow-100 text-yellow-800',
-      withdrawn: 'bg-gray-100 text-gray-800',
+      withdrawn: 'bg-neutral-100 text-gray-800',
     };
     const labels: Record<string, string> = {
       active: '有効',
@@ -219,7 +219,7 @@ export default function MemberDetailPage() {
       withdrawn: '退会',
     };
     return (
-      <span className={`px-2 py-1 text-xs rounded-full ${styles[status] || 'bg-gray-100'}`}>
+      <span className={`px-2 py-1 text-xs rounded-full ${styles[status] || 'bg-neutral-100'}`}>
         {labels[status] || status}
       </span>
     );
@@ -228,7 +228,7 @@ export default function MemberDetailPage() {
   if (loading) {
     return (
       <AdminLayout>
-        <div className="text-center py-8 text-gray-500">読み込み中...</div>
+        <div className="text-center py-8 text-neutral-500">読み込み中...</div>
       </AdminLayout>
     );
   }
@@ -236,7 +236,7 @@ export default function MemberDetailPage() {
   if (!member) {
     return (
       <AdminLayout>
-        <div className="text-center py-8 text-gray-500">会員が見つかりません</div>
+        <div className="text-center py-8 text-neutral-500">会員が見つかりません</div>
       </AdminLayout>
     );
   }
@@ -251,11 +251,11 @@ export default function MemberDetailPage() {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => router.push('/admin/members')}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-neutral-500 hover:text-neutral-700"
             >
               &larr; 戻る
             </button>
-            <h1 className="text-2xl font-bold text-gray-900">{member.name}</h1>
+            <h1 className="text-2xl font-bold text-neutral-900">{member.name}</h1>
             {getStatusBadge(member.status)}
           </div>
           <div className="space-x-2">
@@ -292,38 +292,38 @@ export default function MemberDetailPage() {
             {editing ? (
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">名前</label>
+                  <label className="block text-sm font-medium text-neutral-700">名前</label>
                   <input
                     type="text"
                     value={editForm.name}
                     onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">メール</label>
+                  <label className="block text-sm font-medium text-neutral-700">メール</label>
                   <input
                     type="email"
                     value={editForm.email}
                     onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">電話番号</label>
+                  <label className="block text-sm font-medium text-neutral-700">電話番号</label>
                   <input
                     type="tel"
                     value={editForm.phone}
                     onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">ステータス</label>
+                  <label className="block text-sm font-medium text-neutral-700">ステータス</label>
                   <select
                     value={editForm.status}
                     onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                   >
                     <option value="active">有効</option>
                     <option value="suspended">休会</option>
@@ -331,18 +331,18 @@ export default function MemberDetailPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">備考</label>
+                  <label className="block text-sm font-medium text-neutral-700">備考</label>
                   <textarea
                     value={editForm.note}
                     onChange={(e) => setEditForm({ ...editForm, note: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                     rows={3}
                   />
                 </div>
                 <div className="flex justify-end space-x-2">
                   <button
                     onClick={() => setEditing(false)}
-                    className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md"
+                    className="px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-md"
                   >
                     キャンセル
                   </button>
@@ -358,29 +358,29 @@ export default function MemberDetailPage() {
             ) : (
               <dl className="space-y-3">
                 <div className="flex">
-                  <dt className="w-24 text-sm text-gray-500">メール</dt>
-                  <dd className="text-sm text-gray-900">{member.email}</dd>
+                  <dt className="w-24 text-sm text-neutral-500">メール</dt>
+                  <dd className="text-sm text-neutral-900">{member.email}</dd>
                 </div>
                 <div className="flex">
-                  <dt className="w-24 text-sm text-gray-500">電話番号</dt>
-                  <dd className="text-sm text-gray-900">{member.phone || '-'}</dd>
+                  <dt className="w-24 text-sm text-neutral-500">電話番号</dt>
+                  <dd className="text-sm text-neutral-900">{member.phone || '-'}</dd>
                 </div>
                 <div className="flex">
-                  <dt className="w-24 text-sm text-gray-500">プラン</dt>
-                  <dd className="text-sm text-gray-900">
+                  <dt className="w-24 text-sm text-neutral-500">プラン</dt>
+                  <dd className="text-sm text-neutral-900">
                     {activePlan ? activePlan.plans.name : '未設定'}
                   </dd>
                 </div>
                 <div className="flex">
-                  <dt className="w-24 text-sm text-gray-500">登録日</dt>
-                  <dd className="text-sm text-gray-900">
+                  <dt className="w-24 text-sm text-neutral-500">登録日</dt>
+                  <dd className="text-sm text-neutral-900">
                     {format(new Date(member.created_at), 'yyyy/MM/dd', { locale: ja })}
                   </dd>
                 </div>
                 {member.note && (
                   <div className="flex">
-                    <dt className="w-24 text-sm text-gray-500">備考</dt>
-                    <dd className="text-sm text-gray-900 whitespace-pre-wrap">{member.note}</dd>
+                    <dt className="w-24 text-sm text-neutral-500">備考</dt>
+                    <dd className="text-sm text-neutral-900 whitespace-pre-wrap">{member.note}</dd>
                   </div>
                 )}
               </dl>
@@ -392,7 +392,7 @@ export default function MemberDetailPage() {
             <h2 className="text-lg font-bold mb-4">チケット残高</h2>
             <div className="text-center">
               <div className="text-5xl font-bold text-primary">{balance}</div>
-              <div className="text-gray-500 mt-1">枚</div>
+              <div className="text-neutral-500 mt-1">枚</div>
             </div>
           </div>
         </div>
@@ -401,21 +401,21 @@ export default function MemberDetailPage() {
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-bold mb-4">チケット履歴</h2>
           {ticketLogs.length === 0 ? (
-            <div className="text-center py-4 text-gray-500">履歴がありません</div>
+            <div className="text-center py-4 text-neutral-500">履歴がありません</div>
           ) : (
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-neutral-50">
                 <tr>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">日時</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">種別</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">枚数</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">理由</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-neutral-500">日時</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-neutral-500">種別</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-neutral-500">枚数</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-neutral-500">理由</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-neutral-200">
                 {ticketLogs.map((log) => (
                   <tr key={log.id}>
-                    <td className="px-4 py-2 text-sm text-gray-500">
+                    <td className="px-4 py-2 text-sm text-neutral-500">
                       {format(new Date(log.created_at), 'yyyy/MM/dd HH:mm', { locale: ja })}
                     </td>
                     <td className="px-4 py-2 text-sm">{getTicketTypeLabel(log.type)}</td>
@@ -425,7 +425,7 @@ export default function MemberDetailPage() {
                         {log.amount}
                       </span>
                     </td>
-                    <td className="px-4 py-2 text-sm text-gray-500">{log.reason || '-'}</td>
+                    <td className="px-4 py-2 text-sm text-neutral-500">{log.reason || '-'}</td>
                   </tr>
                 ))}
               </tbody>
@@ -440,11 +440,11 @@ export default function MemberDetailPage() {
               <h2 className="text-lg font-bold mb-4">チケット操作</h2>
               <form onSubmit={handleGrantTickets} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">操作種別</label>
+                  <label className="block text-sm font-medium text-neutral-700">操作種別</label>
                   <select
                     value={ticketForm.type}
                     onChange={(e) => setTicketForm({ ...ticketForm, type: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                   >
                     <option value="grant">付与</option>
                     <option value="consume">消費</option>
@@ -452,25 +452,25 @@ export default function MemberDetailPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">枚数</label>
+                  <label className="block text-sm font-medium text-neutral-700">枚数</label>
                   <input
                     type="number"
                     value={ticketForm.amount}
                     onChange={(e) =>
                       setTicketForm({ ...ticketForm, amount: parseInt(e.target.value) })
                     }
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                     min="1"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">理由</label>
+                  <label className="block text-sm font-medium text-neutral-700">理由</label>
                   <input
                     type="text"
                     value={ticketForm.reason}
                     onChange={(e) => setTicketForm({ ...ticketForm, reason: e.target.value })}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                     placeholder="例: 月間付与、キャンセル返却など"
                   />
                 </div>
@@ -478,7 +478,7 @@ export default function MemberDetailPage() {
                   <button
                     type="button"
                     onClick={() => setShowTicketModal(false)}
-                    className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md"
+                    className="px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-md"
                   >
                     キャンセル
                   </button>
@@ -501,11 +501,11 @@ export default function MemberDetailPage() {
               <h2 className="text-lg font-bold mb-4">プラン付与</h2>
               <form onSubmit={handleAssignPlan} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">プラン</label>
+                  <label className="block text-sm font-medium text-neutral-700">プラン</label>
                   <select
                     value={selectedPlanId}
                     onChange={(e) => setSelectedPlanId(e.target.value)}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md"
                     required
                   >
                     <option value="">選択してください</option>
@@ -520,7 +520,7 @@ export default function MemberDetailPage() {
                   <button
                     type="button"
                     onClick={() => setShowPlanModal(false)}
-                    className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md"
+                    className="px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-md"
                   >
                     キャンセル
                   </button>
