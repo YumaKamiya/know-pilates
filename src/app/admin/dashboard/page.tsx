@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import AdminLayout from '@/components/admin/AdminLayout';
+import { Users, ClipboardList, Calendar, CreditCard } from 'lucide-react';
 
 export default async function AdminDashboardPage() {
   const supabase = await createClient();
@@ -23,9 +24,9 @@ export default async function AdminDashboardPage() {
   ]);
 
   const stats = [
-    { name: '登録会員数', value: memberCount || 0, icon: '👥' },
-    { name: '確定予約数', value: reservationCount || 0, icon: '📋' },
-    { name: '空き枠数', value: slotCount || 0, icon: '📅' },
+    { name: '登録会員数', value: memberCount || 0, icon: Users },
+    { name: '確定予約数', value: reservationCount || 0, icon: ClipboardList },
+    { name: '空き枠数', value: slotCount || 0, icon: Calendar },
   ];
 
   return (
@@ -41,7 +42,9 @@ export default async function AdminDashboardPage() {
             >
               <div className="p-5">
                 <div className="flex items-center">
-                  <div className="flex-shrink-0 text-3xl">{stat.icon}</div>
+                  <div className="flex-shrink-0">
+                    <stat.icon className="w-6 h-6 text-neutral-400" />
+                  </div>
                   <div className="ml-5 w-0 flex-1">
                     <dl>
                       <dt className="text-sm font-medium text-neutral-500 truncate">
@@ -67,7 +70,7 @@ export default async function AdminDashboardPage() {
               href="/admin/slots"
               className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
-              <div className="text-2xl mb-2">📅</div>
+              <Calendar className="w-6 h-6 text-neutral-400 mb-2" />
               <div className="font-medium">予約枠を作成</div>
               <div className="text-sm text-neutral-500">新しい予約枠を追加</div>
             </a>
@@ -75,7 +78,7 @@ export default async function AdminDashboardPage() {
               href="/admin/members"
               className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
-              <div className="text-2xl mb-2">👥</div>
+              <Users className="w-6 h-6 text-neutral-400 mb-2" />
               <div className="font-medium">会員を登録</div>
               <div className="text-sm text-neutral-500">新規会員を追加</div>
             </a>
@@ -83,7 +86,7 @@ export default async function AdminDashboardPage() {
               href="/admin/reservations"
               className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
-              <div className="text-2xl mb-2">📋</div>
+              <ClipboardList className="w-6 h-6 text-neutral-400 mb-2" />
               <div className="font-medium">予約を確認</div>
               <div className="text-sm text-neutral-500">予約一覧を表示</div>
             </a>
@@ -91,7 +94,7 @@ export default async function AdminDashboardPage() {
               href="/admin/plans"
               className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
-              <div className="text-2xl mb-2">💳</div>
+              <CreditCard className="w-6 h-6 text-neutral-400 mb-2" />
               <div className="font-medium">プランを管理</div>
               <div className="text-sm text-neutral-500">料金プランを設定</div>
             </a>

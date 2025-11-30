@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { format } from 'date-fns';
 import { ja } from 'date-fns/locale';
+import { CalendarX2 } from 'lucide-react';
 
 interface Reservation {
   id: string;
@@ -186,8 +187,14 @@ export default function AdminReservationsPage() {
                 </tr>
               ) : reservations.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-4 py-8 text-center text-neutral-500">
-                    予約がありません
+                  <td colSpan={6}>
+                    <div className="px-4 py-12 text-center">
+                      <CalendarX2 className="w-12 h-12 mx-auto text-neutral-300 mb-4" />
+                      <p className="text-neutral-500 text-lg mb-2">予約がありません</p>
+                      <p className="text-neutral-400 text-sm">
+                        検索条件を変更するか、新しい予約を待ちましょう
+                      </p>
+                    </div>
                   </td>
                 </tr>
               ) : (

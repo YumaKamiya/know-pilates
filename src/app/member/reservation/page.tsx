@@ -29,6 +29,7 @@ export default function ReservationPage() {
   const [memberInfo, setMemberInfo] = useState<MemberInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDay, setSelectedDay] = useState<Date | null>(null);
   const [confirmingSlot, setConfirmingSlot] = useState<Slot | null>(null);
   const [reserving, setReserving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -318,6 +319,22 @@ export default function ReservationPage() {
             </button>
           </div>
 
+          {/* ステータス凡例 */}
+          <div className="flex items-center gap-4 mb-4 text-sm flex-wrap">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-primary-100 rounded"></div>
+              <span className="text-neutral-600">予約可能</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-neutral-100 rounded"></div>
+              <span className="text-neutral-600">空きなし</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-primary-600 rounded"></div>
+              <span className="text-neutral-600">今日</span>
+            </div>
+          </div>
+
           {/* カレンダーグリッド */}
           <div className="grid grid-cols-7 gap-2">
             {getWeekDays().map((day) => {
@@ -325,23 +342,29 @@ export default function ReservationPage() {
               const isToday = day.toDateString() === new Date().toDateString();
               const isPast = day < new Date(new Date().setHours(0, 0, 0, 0));
 
+              const hasSlots = daySlots.length > 0;
+              const isSelected = selectedDay?.toDateString() === day.toDateString();
+
               return (
                 <div
                   key={day.toISOString()}
                   className={`bg-white rounded-lg shadow min-h-[200px] ${
                     isPast ? 'opacity-50' : ''
+                  } ${
+                    isSelected ? 'ring-2 ring-primary-500 ring-offset-2' : ''
                   }`}
                 >
-                  <div
-                    className={`px-3 py-2 border-b text-center ${
-                      isToday ? 'bg-primary-600 text-white' : 'bg-neutral-50'
+                  <button
+                    onClick={() => setSelectedDay(day)}
+                    className={`w-full px-3 py-2 border-b text-center transition-colors ${
+                      isToday ? 'bg-primary-600 text-white' : hasSlots ? 'bg-primary-100 hover:bg-primary-200' : 'bg-neutral-100'
                     }`}
                   >
                     <div className="text-xs">
                       {day.toLocaleDateString('ja-JP', { weekday: 'short' })}
                     </div>
                     <div className="font-bold">{day.getDate()}</div>
-                  </div>
+                  </button>
                   <div className="p-2 space-y-1">
                     {daySlots.length === 0 ? (
                       <div className="text-center text-neutral-400 text-xs py-4">

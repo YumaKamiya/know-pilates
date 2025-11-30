@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import MemberCard from '@/components/admin/MemberCard';
 import Link from 'next/link';
+import { Users } from 'lucide-react';
 
 interface Member {
   id: string;
@@ -195,8 +196,14 @@ export default function AdminMembersPage() {
             読み込み中...
           </div>
         ) : members.length === 0 ? (
-          <div className="bg-white rounded-lg shadow p-8 text-center text-neutral-500">
-            会員が登録されていません
+          <div className="bg-white rounded-lg shadow p-8">
+            <div className="px-4 py-12 text-center">
+              <Users className="w-12 h-12 mx-auto text-neutral-300 mb-4" />
+              <p className="text-neutral-500 text-lg mb-2">会員がまだいません</p>
+              <p className="text-neutral-400 text-sm mb-4">
+                「招待する」または「+ 登録」から最初の会員を追加しましょう
+              </p>
+            </div>
           </div>
         ) : (
           <>
