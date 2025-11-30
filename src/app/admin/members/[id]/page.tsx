@@ -267,7 +267,7 @@ export default function MemberDetailPage() {
             </button>
             <button
               onClick={() => setShowPlanModal(true)}
-              className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
+              className="px-4 py-2 min-h-[48px] bg-accent-500 text-white border-2 border-accent-500 hover:bg-accent-600 rounded-lg font-medium"
             >
               プラン付与
             </button>
