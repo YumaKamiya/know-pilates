@@ -33,40 +33,40 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-neutral-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
-        <div>
-          <h2 className="text-center text-2xl font-bold text-neutral-900">
-            管理者ログイン
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-100/50 to-primary-200/30 px-4 py-8">
+      <div className="max-w-md w-full space-y-8 p-6 sm:p-8 bg-white rounded-lg shadow-lg">
+        <div className="text-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+            管理画面へようこそ
           </h2>
-          <p className="mt-2 text-center text-sm text-neutral-600">
-            know（ノウ）ピラティス 管理画面
+          <p className="mt-2 text-base text-neutral-600">
+            know（ノウ）ピラティス
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
               {error}
             </div>
           )}
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-neutral-700">
+              <label htmlFor="email" className="block text-base font-medium text-neutral-700 mb-1">
                 メールアドレス
               </label>
               <input
                 id="email"
                 name="email"
                 type="email"
-                autoComplete="email"
                 required
+                className="appearance-none rounded-lg relative block w-full px-4 py-3 min-h-[48px] border border-neutral-300 placeholder-neutral-400 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:z-10 text-base"
+                placeholder="your.email@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-neutral-700">
+              <label htmlFor="password" className="block text-base font-medium text-neutral-700 mb-1">
                 パスワード
               </label>
               <input
@@ -75,16 +75,16 @@ export default function AdminLoginPage() {
                 type="password"
                 autoComplete="current-password"
                 required
+                className="appearance-none rounded-lg relative block w-full px-4 py-3 min-h-[48px] border border-neutral-300 placeholder-neutral-400 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:z-10 text-base"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
               />
             </div>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group relative w-full flex justify-center px-4 py-3 min-h-[48px] border border-transparent text-base font-medium rounded-lg text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'ログイン中...' : 'ログイン'}
           </button>
