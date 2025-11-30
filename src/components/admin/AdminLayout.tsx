@@ -6,12 +6,13 @@ import { useRouter } from 'next/navigation';
 import AdminSidebar from './AdminSidebar';
 import BottomNav from '@/components/shared/BottomNav';
 import { createClient } from '@/lib/supabase/client';
+import { BarChart3, Calendar, Users, CreditCard, ClipboardList, LogOut, MoreVertical } from 'lucide-react';
 
 const navigation = [
-  { name: 'ホーム', href: '/admin/dashboard', icon: '📊' },
-  { name: '予約枠', href: '/admin/slots', icon: '📅' },
-  { name: '会員', href: '/admin/members', icon: '👥' },
-  { name: 'プラン', href: '/admin/plans', icon: '💳' },
+  { name: 'ホーム', href: '/admin/dashboard', icon: BarChart3 },
+  { name: '予約枠', href: '/admin/slots', icon: Calendar },
+  { name: '会員', href: '/admin/members', icon: Users },
+  { name: 'プラン', href: '/admin/plans', icon: CreditCard },
 ];
 
 export default function AdminLayout({
@@ -49,7 +50,7 @@ export default function AdminLayout({
             className="text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label="メニュー"
           >
-            <span className="text-xl">⋮</span>
+            <MoreVertical className="w-5 h-5" />
           </button>
         </header>
 
@@ -66,7 +67,7 @@ export default function AdminLayout({
                 className="flex items-center w-full px-4 py-3 text-neutral-700 hover:bg-neutral-100 min-h-[44px]"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <span className="mr-3">📋</span>
+                <ClipboardList className="mr-3 w-5 h-5" />
                 予約一覧
               </Link>
               <button
@@ -76,7 +77,7 @@ export default function AdminLayout({
                 }}
                 className="flex items-center w-full px-4 py-3 text-neutral-700 hover:bg-neutral-100 min-h-[44px]"
               >
-                <span className="mr-3">🚪</span>
+                <LogOut className="mr-3 w-5 h-5" />
                 ログアウト
               </button>
             </div>

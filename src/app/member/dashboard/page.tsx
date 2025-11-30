@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import MemberLayout from '@/components/member/MemberLayout';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
+import { Calendar } from 'lucide-react';
 
 interface MemberInfo {
   id: string;
@@ -186,15 +187,22 @@ export default function MemberDashboardPage() {
 
           {/* 予約ボタン */}
           <div className="bg-gradient-to-br from-primary to-primary/80 rounded-lg shadow p-6 text-white">
-            <h2 className="text-sm font-medium text-white/80 mb-2">レッスンを予約する</h2>
-            <p className="text-sm text-white/70 mb-4">
-              空いている日時を選んで、あなたのレッスンを予約できます
-            </p>
+            <div className="flex items-start gap-3 mb-4">
+              <Calendar className="w-6 h-6 text-white/80 flex-shrink-0" />
+              <div>
+                <h2 className="text-base font-medium text-white/90 mb-1">
+                  レッスンを予約する
+                </h2>
+                <p className="text-sm text-white/70">
+                  空いている日時を選んで、あなたのレッスンを予約できます
+                </p>
+              </div>
+            </div>
             <Link
               href="/member/reservation"
-              className="inline-block bg-white text-primary px-6 py-2 rounded-md font-medium hover:bg-neutral-100 transition-colors"
+              className="inline-block w-full px-4 py-3 min-h-[48px] bg-white/20 hover:bg-white/30 rounded-lg text-center font-medium transition-colors"
             >
-              レッスンを予約する
+              予約ページへ
             </Link>
           </div>
         </div>

@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { Home, Calendar, ClipboardList, LogOut } from 'lucide-react';
 
 const navigation = [
-  { name: 'マイページ', href: '/member/dashboard', icon: '🏠' },
-  { name: '予約する', href: '/member/reservation', icon: '📅' },
-  { name: '予約履歴', href: '/member/reservations', icon: '📋' },
+  { name: 'マイページ', href: '/member/dashboard', icon: Home },
+  { name: '予約する', href: '/member/reservation', icon: Calendar },
+  { name: '予約履歴', href: '/member/reservations', icon: ClipboardList },
 ];
 
 export default function MemberSidebar() {
@@ -39,7 +40,7 @@ export default function MemberSidebar() {
                   : 'text-white/80 hover:bg-white/10 hover:text-white'
               }`}
             >
-              <span className="mr-3">{item.icon}</span>
+              <item.icon className="mr-3 w-5 h-5" />
               {item.name}
             </Link>
           );
@@ -50,7 +51,7 @@ export default function MemberSidebar() {
           onClick={handleLogout}
           className="flex items-center w-full px-4 py-2 text-sm font-medium text-white/80 rounded-md hover:bg-white/10 hover:text-white transition-colors"
         >
-          <span className="mr-3">🚪</span>
+          <LogOut className="mr-3 w-5 h-5" />
           ログアウトする
         </button>
       </div>
