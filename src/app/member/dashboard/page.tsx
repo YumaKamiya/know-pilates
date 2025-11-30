@@ -163,14 +163,14 @@ export default function MemberDashboardPage() {
 
   return (
     <MemberLayout>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto space-y-6">
         <h1 className="text-neutral-900 mb-8" style={{ fontSize: 'var(--font-size-heading-1)', lineHeight: 'var(--line-height-heading-1)', fontWeight: '700' }}>
           こんにちは、{memberInfo?.name}さん
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* チケット残高 */}
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
             <h2 className="text-neutral-500 mb-2" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)', fontWeight: '400' }}>あなたのチケット</h2>
             <div className="flex items-baseline">
               <span className="text-4xl font-bold text-primary">

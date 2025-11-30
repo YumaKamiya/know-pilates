@@ -84,7 +84,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="group relative w-full flex justify-center px-4 py-3 min-h-[48px] border border-transparent text-base font-medium rounded-lg text-white bg-primary hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-3 min-h-[48px] bg-accent-500 text-white border-2 border-accent-500 hover:bg-accent-600 rounded-lg font-medium disabled:opacity-50"
           >
             {loading ? 'ログイン中...' : 'ログイン'}
           </button>
