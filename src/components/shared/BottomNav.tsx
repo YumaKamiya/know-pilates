@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { LucideIcon } from 'lucide-react';
 
 interface NavItem {
   name: string;
   href: string;
-  icon: string;
+  icon: LucideIcon;
 }
 
 interface BottomNavProps {
@@ -30,7 +31,7 @@ export default function BottomNav({ items, activeColor = 'text-primary-600' }: B
                 isActive ? activeColor : 'text-neutral-500'
               }`}
             >
-              <span className="text-xl mb-1">{item.icon}</span>
+              <item.icon className="w-5 h-5 mb-1" />
               <span className="text-xs font-medium">{item.name}</span>
             </Link>
           );

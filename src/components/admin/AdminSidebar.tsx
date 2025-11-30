@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { BarChart3, Calendar, ClipboardList, Users, CreditCard, LogOut } from 'lucide-react';
 
 const navigation = [
-  { name: 'ダッシュボード', href: '/admin/dashboard', icon: '📊' },
-  { name: '予約枠管理', href: '/admin/slots', icon: '📅' },
-  { name: '予約一覧', href: '/admin/reservations', icon: '📋' },
-  { name: '会員管理', href: '/admin/members', icon: '👥' },
-  { name: 'プラン管理', href: '/admin/plans', icon: '💳' },
+  { name: 'ダッシュボード', href: '/admin/dashboard', icon: BarChart3 },
+  { name: '予約枠管理', href: '/admin/slots', icon: Calendar },
+  { name: '予約一覧', href: '/admin/reservations', icon: ClipboardList },
+  { name: '会員管理', href: '/admin/members', icon: Users },
+  { name: 'プラン管理', href: '/admin/plans', icon: CreditCard },
 ];
 
 export default function AdminSidebar() {
@@ -41,7 +42,7 @@ export default function AdminSidebar() {
                   : 'text-neutral-400 hover:bg-primary-800 hover:text-white'
               }`}
             >
-              <span className="mr-3">{item.icon}</span>
+              <item.icon className="mr-3 w-5 h-5" />
               {item.name}
             </Link>
           );
@@ -52,7 +53,7 @@ export default function AdminSidebar() {
           onClick={handleLogout}
           className="flex items-center w-full px-4 py-2 text-sm font-medium text-neutral-400 rounded-md hover:bg-primary-800 hover:text-white transition-colors"
         >
-          <span className="mr-3">🚪</span>
+          <LogOut className="mr-3 w-5 h-5" />
           ログアウト
         </button>
       </div>

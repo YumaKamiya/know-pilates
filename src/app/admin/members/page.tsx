@@ -3,7 +3,9 @@
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import MemberCard from '@/components/admin/MemberCard';
+import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
+import { Users } from 'lucide-react';
 
 interface Member {
   id: string;
@@ -151,21 +153,23 @@ export default function AdminMembersPage() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">会員管理</h1>
           <div className="flex gap-2 w-full sm:w-auto">
-            <button
+            <Button
+              variant="primary"
               onClick={() => {
                 setShowInviteModal(true);
                 setInviteResult(null);
               }}
-              className="flex-1 sm:flex-none px-4 py-3 min-h-[44px] bg-accent-500 text-white rounded-lg hover:bg-accent-600 active:bg-accent-700 transition-colors font-medium"
+              className="flex-1 sm:flex-none"
             >
               招待する
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="primary"
               onClick={() => setShowCreateModal(true)}
-              className="flex-1 sm:flex-none px-4 py-3 min-h-[44px] bg-primary-600 text-white rounded-lg hover:bg-primary-700 active:bg-primary-800 transition-colors font-medium"
+              className="flex-1 sm:flex-none"
             >
               + 登録
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -195,8 +199,14 @@ export default function AdminMembersPage() {
             読み込み中...
           </div>
         ) : members.length === 0 ? (
-          <div className="bg-white rounded-lg shadow p-8 text-center text-neutral-500">
-            会員が登録されていません
+          <div className="bg-white rounded-lg shadow p-8">
+            <div className="px-4 py-12 text-center">
+              <Users className="w-12 h-12 mx-auto text-neutral-300 mb-4" />
+              <p className="text-neutral-500 text-lg mb-2">会員がまだいません</p>
+              <p className="text-neutral-400 text-sm mb-4">
+                「招待する」または「+ 登録」から最初の会員を追加しましょう
+              </p>
+            </div>
           </div>
         ) : (
           <>
@@ -323,13 +333,14 @@ export default function AdminMembersPage() {
                   />
                 </div>
                 <div className="flex justify-end space-x-3 pt-4">
-                  <button
+                  <Button
                     type="button"
+                    variant="outline"
                     onClick={() => setShowCreateModal(false)}
-                    className="px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-md"
+                    className="flex-1"
                   >
                     キャンセル
-                  </button>
+                  </Button>
                   <button
                     type="submit"
                     disabled={creating}
@@ -380,13 +391,14 @@ export default function AdminMembersPage() {
                   />
                 </div>
                 <div className="flex justify-end space-x-3 pt-4">
-                  <button
+                  <Button
                     type="button"
+                    variant="outline"
                     onClick={() => setShowInviteModal(false)}
-                    className="px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-md"
+                    className="flex-1"
                   >
                     閉じる
-                  </button>
+                  </Button>
                   <button
                     type="submit"
                     disabled={inviting}

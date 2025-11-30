@@ -6,11 +6,12 @@ import { useRouter } from 'next/navigation';
 import MemberSidebar from './MemberSidebar';
 import BottomNav from '@/components/shared/BottomNav';
 import { createClient } from '@/lib/supabase/client';
+import { Home, Calendar, ClipboardList, MoreVertical, LogOut } from 'lucide-react';
 
 const navigation = [
-  { name: 'ホーム', href: '/member/dashboard', icon: '🏠' },
-  { name: '予約', href: '/member/reservation', icon: '📅' },
-  { name: '履歴', href: '/member/reservations', icon: '📋' },
+  { name: 'ホーム', href: '/member/dashboard', icon: Home },
+  { name: '予約', href: '/member/reservation', icon: Calendar },
+  { name: '履歴', href: '/member/reservations', icon: ClipboardList },
 ];
 
 export default function MemberLayout({
@@ -48,7 +49,7 @@ export default function MemberLayout({
             className="text-white p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-label="メニュー"
           >
-            <span className="text-xl">⋮</span>
+            <MoreVertical className="w-5 h-5" />
           </button>
         </header>
 
@@ -67,7 +68,7 @@ export default function MemberLayout({
                 }}
                 className="flex items-center w-full px-4 py-3 text-neutral-700 hover:bg-neutral-100 min-h-[44px]"
               >
-                <span className="mr-3">🚪</span>
+                <LogOut className="mr-3 w-5 h-5" />
                 ログアウトする
               </button>
             </div>
@@ -75,7 +76,7 @@ export default function MemberLayout({
         )}
 
         {/* メインコンテンツ */}
-        <main className="pt-14 pb-20 px-4">{children}</main>
+        <main className="pt-14 pb-24 px-4">{children}</main>
 
         {/* ボトムナビゲーション */}
         <BottomNav items={navigation} activeColor="text-primary-600" />
