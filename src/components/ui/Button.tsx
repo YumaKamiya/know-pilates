@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "secondary" | "outline" | "destructive";
   size?: "default" | "lg";
   asChild?: boolean;
 }
@@ -32,6 +32,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             // Outline
             "border-2 border-accent-500 text-accent-600 bg-transparent hover:bg-accent-50 active:bg-accent-100 focus-visible:ring-accent-500":
               variant === "outline",
+            // Destructive - 危険なアクション用（赤）
+            "bg-error-500 text-white border-2 border-error-500 hover:bg-error-600 hover:border-error-600 active:bg-error-700 focus-visible:ring-error-500":
+              variant === "destructive",
           },
           // Sizes
           {

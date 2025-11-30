@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
+import { Button } from '@/components/ui/Button';
 import { format } from 'date-fns';
 import { ja } from 'date-fns/locale';
 
@@ -210,12 +211,14 @@ export default function AdminReservationsPage() {
                     </td>
                     <td className="px-4 py-4">
                       {r.status === 'confirmed' && (
-                        <button
+                        <Button
+                          variant="destructive"
+                          size="default"
                           onClick={() => handleCancel(r.id)}
-                          className="px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded transition-colors"
+                          className="px-3 py-2 text-sm"
                         >
                           キャンセル
-                        </button>
+                        </Button>
                       )}
                     </td>
                   </tr>
@@ -253,12 +256,13 @@ export default function AdminReservationsPage() {
                     {getTypeBadge(r.type)}
                   </div>
                   {r.status === 'confirmed' && (
-                    <button
+                    <Button
+                      variant="destructive"
                       onClick={() => handleCancel(r.id)}
-                      className="w-full px-4 py-3 min-h-[48px] text-base text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                      className="w-full"
                     >
                       キャンセル
-                    </button>
+                    </Button>
                   )}
                 </div>
               </div>
