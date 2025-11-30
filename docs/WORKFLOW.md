@@ -116,19 +116,30 @@ Claudeが新しいセッションを開始する際の推奨読み込み順：
 
 ## Git Worktree運用
 
+### ディレクトリ構造
+
+```
+/Users/yumakamiya/AI駆動/
+  ├── know-pilates/           # メインリポジトリ（main/開発中ブランチ）
+  └── .worktrees/             # Worktree専用ディレクトリ
+      ├── feature-name/       # 機能開発用
+      ├── fix-name/           # バグ修正用
+      └── docs-name/          # ドキュメント作業用
+```
+
 ### ブランチ作成
 
 ```bash
-cd /Users/yumakamiya/AI駆動
+cd /Users/yumakamiya/AI駆動/know-pilates
 
 # 機能開発
-git worktree add know-pilates-feature-name feature/feature-name
+git worktree add ../.worktrees/feature-name feature/feature-name
 
 # バグ修正
-git worktree add know-pilates-fix-name fix/fix-name
+git worktree add ../.worktrees/fix-name fix/fix-name
 
 # ドキュメントのみ
-git worktree add know-pilates-docs docs/docs-name
+git worktree add ../.worktrees/docs-name docs/docs-name
 ```
 
 ### ブランチ命名規則
@@ -139,7 +150,7 @@ git worktree add know-pilates-docs docs/docs-name
 ### 作業完了後
 
 ```bash
-cd know-pilates-feature-name
+cd /Users/yumakamiya/AI駆動/.worktrees/feature-name
 
 # 作業、コミット
 git add .
@@ -147,8 +158,8 @@ git commit -m "..."
 git push -u origin feature/feature-name
 
 # PRマージ後、worktree削除
-cd ..
-git worktree remove know-pilates-feature-name
+cd /Users/yumakamiya/AI駆動/know-pilates
+git worktree remove ../.worktrees/feature-name
 ```
 
 ---

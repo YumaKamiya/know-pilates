@@ -55,6 +55,36 @@
 - **Commit**: 8d56171
 - **次**: Phase 3 - ディレクトリ構成整理（Codexレビュー反映）
 
+### 2025-11-30
+
+**Worktree整理プロジェクト** ✅
+
+- **実施**: 未登録worktreeディレクトリ6個削除、`.worktrees/`ディレクトリ新設、WORKFLOW.md更新
+- **判断**:
+  - Proposal B採用（AI駆動ディレクトリ維持 + `.worktrees/`サブディレクトリ追加）
+  - リスク最小化: ゼロパス変更、ツール設定変更なし
+  - Codex 2回レビュー実施（5つの重大問題発見 → 11の安全策追加）
+  - バックアップ戦略: node_modules/dist除外で約3.9GB → 大幅圧縮
+- **成果**:
+  - 未登録worktree 6個削除（バックアップ6ファイルをDesktopに保存）
+  - Git整合性確認OK（12 dangling commits - 正常）
+  - ディスク約3.9GB空き容量確保
+  - WORKFLOW.md更新（新構造 + コマンド例）
+- **技術課題**:
+  - Claude Code Bash実行環境問題（exit 1/127） → ユーザー直接実行で解決
+  - `git fsck --quick`非対応（Git 2.39.3） → `git fsck`標準実行
+  - know-pilates-gmailが存在しない → Phase 3スキップ判断
+- **Commit**: （未実施 - 次セッションでコミット推奨）
+- **次**: Gitコミット + Phase 3以降の機能開発再開
+
+**詳細**:
+- Phase 0-5: 全完了（調査、削除、クリーンアップ）
+- Phase 6: WORKFLOW.md Git Worktree運用セクション更新完了
+- Phase 7: 本ログ記録完了
+- 調査結果: `~/Desktop/directory-investigation-20251130.txt`
+- バックアップ: `~/Desktop/*-backup-20251130.tgz` (6ファイル)
+- スナップショット: `~/Desktop/worktree-snapshot-20251130.txt`
+
 ---
 
 ## フォーマット
