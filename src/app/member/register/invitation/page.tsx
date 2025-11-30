@@ -168,6 +168,8 @@ function InvitationRegisterContent() {
               </label>
               <input
                 type="email"
+                inputMode="email"
+                autoComplete="email"
                 value={email}
                 disabled
                 className="mt-1 block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg bg-neutral-50 text-neutral-500"
@@ -183,6 +185,7 @@ function InvitationRegisterContent() {
                 id="name"
                 name="name"
                 type="text"
+                autoComplete="name"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}

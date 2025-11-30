@@ -85,6 +85,7 @@ export default function MemberRegisterPage() {
                 id="name"
                 name="name"
                 type="text"
+                autoComplete="name"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -101,6 +102,7 @@ export default function MemberRegisterPage() {
                 id="email"
                 name="email"
                 type="email"
+                inputMode="email"
                 autoComplete="email"
                 required
                 value={email}
