@@ -119,7 +119,7 @@ export default function AdminSlotsPage() {
       <div className="space-y-6">
         {/* ヘッダー */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">予約枠管理</h1>
+          <h1 className="text-neutral-900" style={{ fontSize: 'var(--font-size-heading-1)', lineHeight: 'var(--line-height-heading-1)', fontWeight: '700' }}>予約枠管理</h1>
           <button
             onClick={() => setShowCreateModal(true)}
             className="w-full sm:w-auto px-4 py-3 min-h-[44px] bg-primary-600 text-white rounded-lg hover:bg-primary-700 active:bg-primary-800 transition-colors font-medium"
@@ -165,11 +165,13 @@ export default function AdminSlotsPage() {
               <div className="bg-white rounded-lg shadow overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead>
-                      <tr className="bg-neutral-50">
-                        <th className="w-16 p-2 text-xs font-medium text-neutral-500 border-b">時間</th>
+                    <thead className="bg-neutral-100 sticky top-0 z-10">
+                      <tr>
+                        <th className="px-4 py-3 text-left font-semibold text-neutral-700 border-r border-neutral-200 bg-neutral-100" style={{ fontSize: 'var(--font-size-caption)' }}>
+                          時間
+                        </th>
                         {weekDays.map((day) => (
-                          <th key={day.toISOString()} className="p-2 text-xs font-medium text-neutral-500 border-b min-w-[120px]">
+                          <th key={day.toISOString()} className="p-2 font-medium text-neutral-500 border-b min-w-[120px]" style={{ fontSize: 'var(--font-size-caption)' }}>
                             <div>{format(day, 'E', { locale: ja })}</div>
                             <div className="text-lg font-bold text-neutral-900">{format(day, 'd')}</div>
                           </th>
@@ -179,7 +181,7 @@ export default function AdminSlotsPage() {
                     <tbody>
                       {hours.map((hour) => (
                         <tr key={hour} className="border-b">
-                          <td className="p-2 text-xs text-neutral-500 text-center border-r">
+                          <td className="px-4 py-3 font-medium text-neutral-700 border-r border-neutral-200 bg-neutral-50 sticky left-0 z-10" style={{ fontSize: 'var(--font-size-caption)' }}>
                             {hour}:00
                           </td>
                           {weekDays.map((day) => {
@@ -192,29 +194,29 @@ export default function AdminSlotsPage() {
                                   return (
                                     <div
                                       key={slot.id}
-                                      className={`p-2 rounded text-xs mb-1 ${
+                                      className={`p-2 rounded shadow-sm mb-1 ${
                                         hasReservation
                                           ? 'bg-blue-100 text-blue-800'
-                                          : 'bg-green-100 text-green-800'
+                                          : 'bg-primary-500'
                                       }`}
                                     >
-                                      <div className="font-medium">
+                                      <div className="font-medium" style={{ fontSize: 'var(--font-size-caption)' }}>
                                         {format(new Date(slot.start_at), 'HH:mm')} -{' '}
                                         {format(new Date(slot.end_at), 'HH:mm')}
                                       </div>
-                                      <div className="mt-1">
+                                      <div className="mt-1" style={{ fontSize: 'var(--font-size-caption)' }}>
                                         {hasReservation ? (
                                           <span>
                                             {reservation?.type === 'trial' ? '体験' : '会員'}予約
                                           </span>
                                         ) : (
-                                          <span>空き</span>
+                                          <span className="font-semibold text-white">空き</span>
                                         )}
                                       </div>
                                       {!hasReservation && (
                                         <button
                                           onClick={() => handleDeleteSlot(slot.id)}
-                                          className="mt-1 min-h-[32px] text-red-600 hover:text-red-800 font-medium"
+                                          className="mt-1 min-h-[32px] text-white underline hover:text-primary-100 transition-colors" style={{ fontSize: 'var(--font-size-caption)' }}
                                         >
                                           削除
                                         </button>

@@ -130,7 +130,7 @@ export default function ReservationsPage() {
   return (
     <MemberLayout>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold text-neutral-900 mb-6">あなたの予約履歴</h1>
+        <h1 className="text-neutral-900 mb-6" style={{ fontSize: 'var(--font-size-heading-1)', lineHeight: 'var(--line-height-heading-1)', fontWeight: '700' }}>あなたの予約履歴</h1>
 
         {message && (
           <div
@@ -146,7 +146,7 @@ export default function ReservationsPage() {
 
         {/* 今後の予約 */}
         <section className="mb-8">
-          <h2 className="text-lg font-medium text-neutral-900 mb-4">ご予約いただいているレッスン</h2>
+          <h2 className="text-neutral-900 mb-4" style={{ fontSize: 'var(--font-size-heading-3)', lineHeight: 'var(--line-height-heading-3)', fontWeight: '600' }}>ご予約いただいているレッスン</h2>
           <div className="bg-white rounded-lg shadow">
             {upcomingReservations.length === 0 ? (
               <div className="px-6 py-8 text-center text-neutral-500">
@@ -158,10 +158,10 @@ export default function ReservationsPage() {
                   <div key={reservation.id} className="px-6 py-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-neutral-900 font-medium">
+                        <p className="text-neutral-900 font-medium" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>
                           {formatDateTime(reservation.slots.start_at)}
                         </p>
-                        <p className="text-sm text-neutral-500">
+                        <p className="text-neutral-500" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}>
                           {new Date(reservation.slots.start_at).toLocaleTimeString('ja-JP', {
                             hour: '2-digit',
                             minute: '2-digit',
@@ -179,13 +179,13 @@ export default function ReservationsPage() {
                           <button
                             onClick={() => handleCancel(reservation.id)}
                             disabled={cancelling === reservation.id}
-                            className="text-red-600 hover:text-red-800 text-sm font-medium disabled:opacity-50"
+                            className="text-red-600 hover:text-red-800 font-medium disabled:opacity-50" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}
                           >
                             {cancelling === reservation.id ? 'キャンセル中...' : 'キャンセル'}
                           </button>
                         )}
                         {!canCancel(reservation) && reservation.status === 'confirmed' && (
-                          <span className="text-xs text-neutral-400">
+                          <span className="text-neutral-400" style={{ fontSize: 'var(--font-size-caption)' }}>
                             キャンセル期限切れ
                           </span>
                         )}
@@ -200,7 +200,7 @@ export default function ReservationsPage() {
 
         {/* 過去の予約 */}
         <section>
-          <h2 className="text-lg font-medium text-neutral-900 mb-4">これまでのレッスン</h2>
+          <h2 className="text-neutral-900 mb-4" style={{ fontSize: 'var(--font-size-heading-3)', lineHeight: 'var(--line-height-heading-3)', fontWeight: '600' }}>これまでのレッスン</h2>
           <div className="bg-white rounded-lg shadow">
             {pastReservations.length === 0 ? (
               <div className="px-6 py-8 text-center text-neutral-500">
@@ -212,10 +212,10 @@ export default function ReservationsPage() {
                   <div key={reservation.id} className="px-6 py-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-neutral-900 font-medium">
+                        <p className="text-neutral-900 font-medium" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>
                           {formatDateTime(reservation.slots.start_at)}
                         </p>
-                        <p className="text-sm text-neutral-500">
+                        <p className="text-neutral-500" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}>
                           {new Date(reservation.slots.start_at).toLocaleTimeString('ja-JP', {
                             hour: '2-digit',
                             minute: '2-digit',

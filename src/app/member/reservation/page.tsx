@@ -254,12 +254,12 @@ export default function ReservationPage() {
       <div className="max-w-6xl mx-auto">
         {/* ヘッダー */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">レッスンを予約する</h1>
-          <div className="bg-primary-100 text-primary-700 px-4 py-2 rounded-lg text-sm sm:text-base">
+          <h1 className="text-neutral-900" style={{ fontSize: 'var(--font-size-heading-1)', lineHeight: 'var(--line-height-heading-1)', fontWeight: '700' }}>レッスンを予約する</h1>
+          <div className="bg-primary-100 text-primary-700 px-4 py-2 rounded-lg" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>
             {memberInfo?.planType === 'monthly' ? (
               <>
                 今月の残り: <span className="font-bold">{memberInfo.currentMonthRemaining ?? 0}</span> / {memberInfo.ticketsPerMonth ?? 0}回
-                {memberInfo.planName && <span className="ml-2 text-xs">({memberInfo.planName})</span>}
+                {memberInfo.planName && <span className="ml-2" style={{ fontSize: 'var(--font-size-caption)' }}>({memberInfo.planName})</span>}
               </>
             ) : (
               <>
@@ -320,18 +320,25 @@ export default function ReservationPage() {
           </div>
 
           {/* ステータス凡例 */}
-          <div className="flex items-center gap-4 mb-4 text-sm flex-wrap">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-primary-100 rounded"></div>
-              <span className="text-neutral-600">予約可能</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-neutral-100 rounded"></div>
-              <span className="text-neutral-600">空きなし</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-primary-600 rounded"></div>
-              <span className="text-neutral-600">今日</span>
+          <div className="bg-neutral-50 p-4 rounded-lg mb-6">
+            <p className="font-semibold text-neutral-700 mb-3" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>カレンダーの見方</p>
+            <div className="flex items-center gap-6 flex-wrap" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}>
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-primary-100 rounded border border-primary-200"></div>
+                <span className="text-neutral-700">予約可能</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-neutral-100 rounded border border-neutral-200"></div>
+                <span className="text-neutral-700">空きなし</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-primary-600 rounded"></div>
+                <span className="text-neutral-700">今日</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-white rounded border-2 border-primary-500"></div>
+                <span className="text-neutral-700">選択中</span>
+              </div>
             </div>
           </div>
 
@@ -350,25 +357,32 @@ export default function ReservationPage() {
                   key={day.toISOString()}
                   className={`bg-white rounded-lg shadow min-h-[200px] ${
                     isPast ? 'opacity-50' : ''
-                  } ${
-                    isSelected ? 'ring-2 ring-primary-500 ring-offset-2' : ''
                   }`}
                 >
                   <button
                     onClick={() => setSelectedDay(day)}
-                    className={`w-full px-3 py-2 border-b text-center transition-colors ${
-                      isToday ? 'bg-primary-600 text-white' : hasSlots ? 'bg-primary-100 hover:bg-primary-200' : 'bg-neutral-100'
+                    disabled={!hasSlots && !isToday}
+                    className={`w-full text-center p-3 rounded-t-lg transition-all duration-200 ${
+                      isToday
+                        ? "bg-primary-600 text-white font-bold shadow-md"
+                        : hasSlots
+                        ? "bg-primary-100 hover:bg-primary-200 hover:shadow-sm"
+                        : "bg-neutral-100 text-neutral-400 cursor-not-allowed"
+                    } ${
+                      selectedDay?.toDateString() === day.toDateString()
+                        ? "ring-3 ring-primary-500 ring-offset-3 scale-105"
+                        : ""
                     }`}
                   >
-                    <div className="text-xs">
+                    <div style={{ fontSize: 'var(--font-size-caption)' }} className="font-medium">
                       {day.toLocaleDateString('ja-JP', { weekday: 'short' })}
                     </div>
-                    <div className="font-bold">{day.getDate()}</div>
+                    <div className="text-xl font-bold mt-1">{day.getDate()}</div>
                   </button>
                   <div className="p-2 space-y-1">
                     {daySlots.length === 0 ? (
-                      <div className="text-center text-neutral-400 text-xs py-4">
-                        空きがありません
+                      <div className="text-center py-3 px-2 bg-neutral-50 rounded border border-neutral-100">
+                        <div style={{ fontSize: 'var(--font-size-caption)' }} className="text-neutral-400">-</div>
                       </div>
                     ) : (
                       daySlots.map((slot) => (
@@ -381,9 +395,11 @@ export default function ReservationPage() {
                               ? (memberInfo.currentMonthRemaining ?? 0) <= 0
                               : (memberInfo?.ticketBalance || 0) <= 0)
                           }
-                          className="w-full px-2 py-2 min-h-[44px] text-sm bg-primary-100 text-primary-700 rounded hover:bg-primary-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full text-center py-3 px-2 bg-primary-50 rounded border border-primary-200 hover:bg-primary-100 hover:border-primary-300 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          {formatTime(slot.start_at)}
+                          <div style={{ fontSize: 'var(--font-size-body)' }} className="font-semibold text-primary-700">
+                            {formatTime(slot.start_at)}
+                          </div>
                         </button>
                       ))
                     )}

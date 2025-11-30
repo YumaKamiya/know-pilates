@@ -32,7 +32,7 @@ export default async function AdminDashboardPage() {
   return (
     <AdminLayout>
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-neutral-900">ダッシュボード</h1>
+        <h1 className="text-neutral-900" style={{ fontSize: 'var(--font-size-heading-1)', lineHeight: 'var(--line-height-heading-1)', fontWeight: '700' }}>ダッシュボード</h1>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           {stats.map((stat) => (

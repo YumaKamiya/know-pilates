@@ -164,14 +164,14 @@ export default function MemberDashboardPage() {
   return (
     <MemberLayout>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold text-neutral-900 mb-8">
+        <h1 className="text-neutral-900 mb-8" style={{ fontSize: 'var(--font-size-heading-1)', lineHeight: 'var(--line-height-heading-1)', fontWeight: '700' }}>
           こんにちは、{memberInfo?.name}さん
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {/* チケット残高 */}
           <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-sm font-medium text-neutral-500 mb-2">あなたのチケット</h2>
+            <h2 className="text-neutral-500 mb-2" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)', fontWeight: '400' }}>あなたのチケット</h2>
             <div className="flex items-baseline">
               <span className="text-4xl font-bold text-primary">
                 {memberInfo?.ticketBalance}
@@ -179,7 +179,7 @@ export default function MemberDashboardPage() {
               <span className="ml-2 text-neutral-500">枚</span>
             </div>
             {memberInfo?.currentPlan && (
-              <p className="mt-2 text-sm text-neutral-600">
+              <p className="mt-2 text-neutral-600" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}>
                 {memberInfo.currentPlan.name}（月{memberInfo.currentPlan.ticketsPerMonth}枚）
               </p>
             )}
@@ -190,10 +190,10 @@ export default function MemberDashboardPage() {
             <div className="flex items-start gap-3 mb-4">
               <Calendar className="w-6 h-6 text-white/80 flex-shrink-0" />
               <div>
-                <h2 className="text-base font-medium text-white/90 mb-1">
+                <h2 className="text-white/90 mb-1" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)', fontWeight: '400' }}>
                   レッスンを予約する
                 </h2>
-                <p className="text-sm text-white/70">
+                <p className="text-white/70" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}>
                   空いている日時を選んで、あなたのレッスンを予約できます
                 </p>
               </div>
@@ -210,27 +210,27 @@ export default function MemberDashboardPage() {
         {/* 今後の予約 */}
         <div className="bg-white rounded-lg shadow">
           <div className="px-6 py-4 border-b border-neutral-200">
-            <h2 className="text-lg font-medium text-neutral-900">ご予約いただいているレッスン</h2>
+            <h2 className="text-neutral-900" style={{ fontSize: 'var(--font-size-heading-3)', lineHeight: 'var(--line-height-heading-3)', fontWeight: '600' }}>ご予約いただいているレッスン</h2>
           </div>
           <div className="divide-y divide-neutral-200">
             {memberInfo?.upcomingReservations.length === 0 ? (
-              <div className="px-6 py-8 text-center text-neutral-500">
+              <div className="px-6 py-8 text-center text-neutral-500" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>
                 予約されたレッスンはまだありません
               </div>
             ) : (
               memberInfo?.upcomingReservations.map((reservation) => (
                 <div key={reservation.id} className="px-6 py-4 flex items-center justify-between">
                   <div>
-                    <p className="text-neutral-900 font-medium">
+                    <p className="text-neutral-900 font-medium" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>
                       {formatDateTime(reservation.startAt)}
                     </p>
-                    <p className="text-sm text-neutral-500">
+                    <p className="text-neutral-500" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}>
                       {new Date(reservation.startAt).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
                       {' - '}
                       {new Date(reservation.endAt).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full font-medium bg-green-100 text-green-800" style={{ fontSize: 'var(--font-size-caption)' }}>
                     予約済み
                   </span>
                 </div>
@@ -241,7 +241,7 @@ export default function MemberDashboardPage() {
             <div className="px-6 py-4 border-t border-neutral-200">
               <Link
                 href="/member/reservations"
-                className="text-primary hover:text-primary/80 text-sm font-medium"
+                className="text-primary hover:text-primary/80 font-medium" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}
               >
                 すべての予約を見る →
               </Link>
