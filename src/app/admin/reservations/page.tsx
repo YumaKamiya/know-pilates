@@ -121,7 +121,7 @@ export default function AdminReservationsPage() {
     <AdminLayout>
       <div className="space-y-6">
         {/* タイトル */}
-        <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">
+        <h1 className="text-neutral-900" style={{ fontSize: 'var(--font-size-heading-1)', lineHeight: 'var(--line-height-heading-1)', fontWeight: '700' }}>
           予約一覧
         </h1>
 

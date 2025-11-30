@@ -151,7 +151,7 @@ export default function AdminMembersPage() {
     <AdminLayout>
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">会員管理</h1>
+          <h1 className="text-neutral-900" style={{ fontSize: 'var(--font-size-heading-1)', lineHeight: 'var(--line-height-heading-1)', fontWeight: '700' }}>会員管理</h1>
           <div className="flex gap-2 w-full sm:w-auto">
             <Button
               variant="primary"

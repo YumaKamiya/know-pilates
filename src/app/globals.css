@@ -69,16 +69,33 @@
   --font-serif: "Noto Serif JP", serif;
 
   /* 50-60代向けフォントサイズ - 基本18px以上 */
-  --font-size-base: 1.125rem; /* 18px */
-  --font-size-lg: 1.25rem;    /* 20px */
-  --font-size-xl: 1.5rem;     /* 24px */
-  --font-size-2xl: 1.875rem;  /* 30px */
-  --font-size-3xl: 2.25rem;   /* 36px */
-  --font-size-4xl: 3rem;      /* 48px */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+
+  /* デザイントークン（50-60代向け） */
+  --font-size-heading-1: 1.5rem;     /* 24px */
+  --font-size-heading-2: 1.25rem;    /* 20px */
+  --font-size-heading-3: 1.125rem;   /* 18px */
+  --font-size-body-lg: 1.125rem;     /* 18px */
+  --font-size-body: 1rem;            /* 16px */
+  --font-size-caption: 0.875rem;     /* 14px */
 
   /* Line height - 1.8 for readability */
   --line-height-relaxed: 1.8;
   --line-height-loose: 2;
+  --line-height-heading-1: 1.4;
+  --line-height-heading-2: 1.5;
+  --line-height-heading-3: 1.5;
+  --line-height-body-lg: 1.6;
+  --line-height-body: 1.6;
+  --line-height-caption: 1.5;
 }
 
 /* Base styles */
