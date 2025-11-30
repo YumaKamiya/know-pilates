@@ -304,7 +304,7 @@ export default function ReservationPage() {
           <div className="flex items-center justify-between mb-6 bg-white rounded-lg shadow px-4 py-3">
             <button
               onClick={() => navigateWeek('prev')}
-              className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-md transition-colors"
+              className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 active:bg-neutral-200 rounded-md transition-colors"
             >
               ← 前の週
             </button>
@@ -313,30 +313,30 @@ export default function ReservationPage() {
             </span>
             <button
               onClick={() => navigateWeek('next')}
-              className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-md transition-colors"
+              className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 active:bg-neutral-200 rounded-md transition-colors"
             >
               次の週 →
             </button>
           </div>
 
           {/* ステータス凡例 */}
-          <div className="bg-neutral-50 p-4 rounded-lg mb-6">
-            <p className="font-semibold text-neutral-700 mb-3" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>カレンダーの見方</p>
-            <div className="flex items-center gap-6 flex-wrap" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-primary-100 rounded border border-primary-200"></div>
+          <div className="bg-neutral-50 p-5 rounded-lg mb-6">
+            <p className="font-semibold text-neutral-700 mb-4" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>カレンダーの見方</p>
+            <div className="flex items-center gap-8 flex-wrap" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-primary-100 rounded border border-primary-200 flex-shrink-0"></div>
                 <span className="text-neutral-700">予約可能</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-neutral-100 rounded border border-neutral-200"></div>
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-neutral-100 rounded border border-neutral-200 flex-shrink-0"></div>
                 <span className="text-neutral-700">空きなし</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-primary-600 rounded"></div>
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-primary-600 rounded flex-shrink-0"></div>
                 <span className="text-neutral-700">今日</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-white rounded border-2 border-primary-500"></div>
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-white rounded border-2 border-primary-500 flex-shrink-0"></div>
                 <span className="text-neutral-700">選択中</span>
               </div>
             </div>
