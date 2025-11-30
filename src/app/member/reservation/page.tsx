@@ -251,11 +251,13 @@ export default function ReservationPage() {
 
   return (
     <MemberLayout>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto space-y-6">
         {/* ヘッダー */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">レッスンを予約する</h1>
-          <div className="bg-primary-100 text-primary-700 px-4 py-2 rounded-lg text-sm sm:text-base">
+        <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-6">レッスンを予約する</h1>
+
+        {/* チケット残数カード */}
+        <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+          <div className="text-sm sm:text-base">
             {memberInfo?.planType === 'monthly' ? (
               <>
                 今月の残り: <span className="font-bold">{memberInfo.currentMonthRemaining ?? 0}</span> / {memberInfo.ticketsPerMonth ?? 0}回
@@ -301,7 +303,7 @@ export default function ReservationPage() {
         {/* デスクトップ: 既存の7列グリッド */}
         <div className="hidden md:block">
           {/* 週のナビゲーション */}
-          <div className="flex items-center justify-between mb-6 bg-white rounded-lg shadow px-4 py-3">
+          <div className="flex items-center justify-between bg-white rounded-lg shadow p-4 sm:p-6">
             <button
               onClick={() => navigateWeek('prev')}
               className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-md transition-colors"
@@ -320,7 +322,8 @@ export default function ReservationPage() {
           </div>
 
           {/* ステータス凡例 */}
-          <div className="flex items-center gap-4 mb-4 text-sm flex-wrap">
+          <div className="bg-neutral-50 p-4 rounded-lg">
+            <div className="flex items-center gap-4 text-sm flex-wrap">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-primary-100 rounded"></div>
               <span className="text-neutral-600">予約可能</span>
@@ -332,6 +335,7 @@ export default function ReservationPage() {
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-primary-600 rounded"></div>
               <span className="text-neutral-600">今日</span>
+            </div>
             </div>
           </div>
 

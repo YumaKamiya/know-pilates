@@ -119,14 +119,14 @@ export default function AdminReservationsPage() {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
+      <div className="max-w-7xl mx-auto space-y-6">
         {/* タイトル */}
-        <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">
+        <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-6">
           予約一覧
         </h1>
 
         {/* 検索フォーム */}
-        <form onSubmit={handleSearch} className="bg-white rounded-lg shadow p-4">
+        <form onSubmit={handleSearch} className="bg-white rounded-lg shadow p-4 sm:p-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <input
               type="text"
@@ -238,16 +238,16 @@ export default function AdminReservationsPage() {
         {/* モバイル: カード */}
         <div className="block md:hidden space-y-4">
           {loading ? (
-            <div className="bg-white rounded-lg shadow p-6 text-center text-neutral-500">
+            <div className="bg-white rounded-lg shadow p-4 sm:p-6 text-center text-neutral-500">
               読み込み中...
             </div>
           ) : reservations.length === 0 ? (
-            <div className="bg-white rounded-lg shadow p-6 text-center text-neutral-500">
+            <div className="bg-white rounded-lg shadow p-4 sm:p-6 text-center text-neutral-500">
               予約がありません
             </div>
           ) : (
             reservations.map((r) => (
-              <div key={r.id} className="bg-white rounded-lg shadow p-4">
+              <div key={r.id} className="bg-white rounded-lg shadow p-4 sm:p-6">
                 <div className="space-y-3">
                   <div className="font-medium text-lg">
                     {r.members?.name || '体験予約'}

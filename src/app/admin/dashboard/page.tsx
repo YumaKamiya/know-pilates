@@ -31,10 +31,10 @@ export default async function AdminDashboardPage() {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-neutral-900">ダッシュボード</h1>
+      <div className="max-w-7xl mx-auto space-y-6">
+        <h1 className="text-2xl font-bold text-neutral-900 mb-6">ダッシュボード</h1>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {stats.map((stat) => (
             <div
               key={stat.name}
@@ -61,11 +61,11 @@ export default async function AdminDashboardPage() {
           ))}
         </div>
 
-        <div className="bg-white shadow rounded-lg p-6">
+        <div className="bg-white shadow rounded-lg p-4 sm:p-6">
           <h2 className="text-lg font-medium text-neutral-900 mb-4">
             クイックアクション
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <a
               href="/admin/slots"
               className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"

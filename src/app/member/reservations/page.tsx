@@ -129,7 +129,7 @@ export default function ReservationsPage() {
 
   return (
     <MemberLayout>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold text-neutral-900 mb-6">あなたの予約履歴</h1>
 
         {message && (
@@ -145,7 +145,7 @@ export default function ReservationsPage() {
         )}
 
         {/* 今後の予約 */}
-        <section className="mb-8">
+        <section>
           <h2 className="text-lg font-medium text-neutral-900 mb-4">ご予約いただいているレッスン</h2>
           <div className="bg-white rounded-lg shadow">
             {upcomingReservations.length === 0 ? (

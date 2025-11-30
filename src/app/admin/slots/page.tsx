@@ -116,10 +116,10 @@ export default function AdminSlotsPage() {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
+      <div className="max-w-7xl mx-auto space-y-6">
         {/* ヘッダー */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">予約枠管理</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-6">予約枠管理</h1>
           <button
             onClick={() => setShowCreateModal(true)}
             className="w-full sm:w-auto px-4 py-3 min-h-[44px] bg-primary-600 text-white rounded-lg hover:bg-primary-700 active:bg-primary-800 transition-colors font-medium"
@@ -129,7 +129,7 @@ export default function AdminSlotsPage() {
         </div>
 
         {loading ? (
-          <div className="bg-white rounded-lg shadow p-8 text-center text-neutral-500">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 text-center text-neutral-500">
             読み込み中...
           </div>
         ) : (
@@ -142,7 +142,7 @@ export default function AdminSlotsPage() {
             {/* デスクトップ: 既存の週間表示 */}
             <div className="hidden md:block space-y-4">
               {/* 週ナビゲーション */}
-              <div className="flex items-center justify-between bg-white rounded-lg shadow p-4">
+              <div className="flex items-center justify-between bg-white rounded-lg shadow p-4 sm:p-6">
                 <button
                   onClick={() => setCurrentWeek(subWeeks(currentWeek, 1))}
                   className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"

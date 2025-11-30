@@ -149,9 +149,9 @@ export default function AdminMembersPage() {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
+      <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900">会員管理</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-6">会員管理</h1>
           <div className="flex gap-2 w-full sm:w-auto">
             <Button
               variant="primary"
@@ -174,7 +174,7 @@ export default function AdminMembersPage() {
         </div>
 
         {/* 検索 */}
-        <form onSubmit={handleSearch} className="bg-white rounded-lg shadow p-4">
+        <form onSubmit={handleSearch} className="bg-white rounded-lg shadow p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="text"

@@ -23,16 +23,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           "min-h-[48px] min-w-[120px]",
           // Variants
           {
-            // Primary - テラコッタ
+            // Primary - テラコッタ（変更なし）
             "bg-accent-500 text-white border-2 border-accent-500 hover:bg-accent-600 hover:border-accent-600 active:bg-accent-700 focus-visible:ring-accent-500":
               variant === "primary",
-            // Secondary - ベージュ
-            "bg-primary-100 text-primary-800 border-2 border-primary-300 hover:bg-primary-200 hover:border-primary-400 active:bg-primary-300 focus-visible:ring-primary-500":
+            // Secondary - ベージュ（背景を濃化: primary-100 → primary-200）
+            "bg-primary-200 text-primary-800 border-2 border-primary-200 hover:bg-primary-300 hover:border-primary-300 active:bg-primary-400 focus-visible:ring-primary-500":
               variant === "secondary",
-            // Outline
-            "border-2 border-accent-500 text-accent-600 bg-transparent hover:bg-accent-50 active:bg-accent-100 focus-visible:ring-accent-500":
+            // Outline（ボーダーを濃化: accent-500 → accent-600、テキスト色も調整）
+            "bg-white text-accent-700 border-2 border-accent-600 hover:bg-accent-50 active:bg-accent-100 focus-visible:ring-accent-500":
               variant === "outline",
-            // Destructive - 危険なアクション用（赤）
+            // Destructive - 危険なアクション用（赤、変更なし）
             "bg-error-500 text-white border-2 border-error-500 hover:bg-error-600 hover:border-error-600 active:bg-error-700 focus-visible:ring-error-500":
               variant === "destructive",
           },

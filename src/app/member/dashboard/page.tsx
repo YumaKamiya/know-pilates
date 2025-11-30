@@ -163,14 +163,14 @@ export default function MemberDashboardPage() {
 
   return (
     <MemberLayout>
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold text-neutral-900 mb-8">
+      <div className="max-w-4xl mx-auto space-y-6">
+        <h1 className="text-2xl font-bold text-neutral-900 mb-6">
           こんにちは、{memberInfo?.name}さん
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* チケット残高 */}
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
             <h2 className="text-sm font-medium text-neutral-500 mb-2">あなたのチケット</h2>
             <div className="flex items-baseline">
               <span className="text-4xl font-bold text-primary">
@@ -186,7 +186,7 @@ export default function MemberDashboardPage() {
           </div>
 
           {/* 予約ボタン */}
-          <div className="bg-gradient-to-br from-primary to-primary/80 rounded-lg shadow p-6 text-white">
+          <div className="bg-gradient-to-br from-primary to-primary/80 rounded-lg shadow p-4 sm:p-6 text-white">
             <div className="flex items-start gap-3 mb-4">
               <Calendar className="w-6 h-6 text-white/80 flex-shrink-0" />
               <div>
