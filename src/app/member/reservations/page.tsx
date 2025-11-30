@@ -1,7 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import MemberLayout from '@/components/member/MemberLayout';
+import { Button } from '@/components/ui/Button';
+import { Calendar } from 'lucide-react';
 
 interface Reservation {
   id: string;
@@ -149,8 +152,19 @@ export default function ReservationsPage() {
           <h2 className="text-neutral-900 mb-4" style={{ fontSize: 'var(--font-size-heading-3)', lineHeight: 'var(--line-height-heading-3)', fontWeight: '600' }}>ご予約いただいているレッスン</h2>
           <div className="bg-white rounded-lg shadow">
             {upcomingReservations.length === 0 ? (
-              <div className="px-6 py-8 text-center text-neutral-500">
-                予約されたレッスンはまだありません
+              <div className="p-6 sm:p-8 text-center">
+                <Calendar className="w-16 h-16 mx-auto text-neutral-300 mb-4" />
+                <p className="text-heading-3 text-neutral-700 mb-3">
+                  予約されたレッスンはまだありません
+                </p>
+                <p className="text-body text-neutral-500 mb-6">
+                  カレンダーから空いている日時を選んで予約しましょう
+                </p>
+                <Link href="/member/reservation">
+                  <Button variant="primary" size="lg" className="px-8">
+                    レッスンを予約する
+                  </Button>
+                </Link>
               </div>
             ) : (
               <div className="divide-y divide-neutral-200">

@@ -200,12 +200,20 @@ export default function AdminMembersPage() {
           </div>
         ) : members.length === 0 ? (
           <div className="bg-white rounded-lg shadow p-8">
-            <div className="px-4 py-12 text-center">
-              <Users className="w-12 h-12 mx-auto text-neutral-300 mb-4" />
-              <p className="text-neutral-500 text-lg mb-2">会員がまだいません</p>
-              <p className="text-neutral-400 text-sm mb-4">
+            <div className="px-4 py-16 text-center">
+              <Users className="w-16 h-16 mx-auto text-neutral-300 mb-6" />
+              <p className="text-heading-2 text-neutral-700 mb-3">会員がまだいません</p>
+              <p className="text-body text-neutral-500 mb-8 max-w-md mx-auto">
                 「招待する」または「+ 登録」から最初の会員を追加しましょう
               </p>
+              <div className="flex gap-3 justify-center">
+                <Button variant="primary" onClick={() => setShowInviteModal(true)}>
+                  招待する
+                </Button>
+                <Button variant="outline" onClick={() => setShowCreateModal(true)}>
+                  + 登録
+                </Button>
+              </div>
             </div>
           </div>
         ) : (

@@ -186,23 +186,23 @@ export default function MemberDashboardPage() {
           </div>
 
           {/* 予約ボタン */}
-          <div className="bg-gradient-to-br from-primary to-primary/80 rounded-lg shadow p-6 text-white">
-            <div className="flex items-start gap-3 mb-4">
-              <Calendar className="w-6 h-6 text-white/80 flex-shrink-0" />
+          <div className="bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg shadow-lg p-4 sm:p-6 text-white">
+            <div className="flex items-start gap-3 mb-6">
+              <Calendar className="w-7 h-7 text-white flex-shrink-0 mt-1" />
               <div>
-                <h2 className="text-white/90 mb-1" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)', fontWeight: '400' }}>
+                <h2 className="text-heading-3 text-white mb-2">
                   レッスンを予約する
                 </h2>
-                <p className="text-white/70" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}>
+                <p className="text-body text-white/90">
                   空いている日時を選んで、あなたのレッスンを予約できます
                 </p>
               </div>
             </div>
             <Link
               href="/member/reservation"
-              className="inline-block w-full px-4 py-3 min-h-[48px] bg-white/20 hover:bg-white/30 rounded-lg text-center font-medium transition-colors"
+              className="inline-block w-full px-6 py-4 min-h-[48px] bg-white text-primary-700 rounded-lg text-center font-bold text-lg hover:bg-white/95 active:bg-white/90 transition-colors shadow-md"
             >
-              予約ページへ
+              今すぐ予約する
             </Link>
           </div>
         </div>

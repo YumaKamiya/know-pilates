@@ -70,7 +70,7 @@ export default async function AdminDashboardPage() {
               href="/admin/slots"
               className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
-              <Calendar className="w-6 h-6 text-neutral-400 mb-2" />
+              <Calendar className="w-6 h-6 text-primary-600 mb-2" />
               <div className="font-medium">予約枠を作成</div>
               <div className="text-sm text-neutral-500">新しい予約枠を追加</div>
             </a>
@@ -78,7 +78,7 @@ export default async function AdminDashboardPage() {
               href="/admin/members"
               className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
-              <Users className="w-6 h-6 text-neutral-400 mb-2" />
+              <Users className="w-6 h-6 text-primary-600 mb-2" />
               <div className="font-medium">会員を登録</div>
               <div className="text-sm text-neutral-500">新規会員を追加</div>
             </a>
@@ -86,7 +86,7 @@ export default async function AdminDashboardPage() {
               href="/admin/reservations"
               className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
-              <ClipboardList className="w-6 h-6 text-neutral-400 mb-2" />
+              <ClipboardList className="w-6 h-6 text-primary-600 mb-2" />
               <div className="font-medium">予約を確認</div>
               <div className="text-sm text-neutral-500">予約一覧を表示</div>
             </a>
@@ -94,7 +94,7 @@ export default async function AdminDashboardPage() {
               href="/admin/plans"
               className="p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
             >
-              <CreditCard className="w-6 h-6 text-neutral-400 mb-2" />
+              <CreditCard className="w-6 h-6 text-primary-600 mb-2" />
               <div className="font-medium">プランを管理</div>
               <div className="text-sm text-neutral-500">料金プランを設定</div>
             </a>

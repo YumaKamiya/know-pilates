@@ -189,11 +189,11 @@ export default function AdminReservationsPage() {
               ) : reservations.length === 0 ? (
                 <tr>
                   <td colSpan={6}>
-                    <div className="px-4 py-12 text-center">
-                      <CalendarX2 className="w-12 h-12 mx-auto text-neutral-300 mb-4" />
-                      <p className="text-neutral-500 text-lg mb-2">予約がありません</p>
-                      <p className="text-neutral-400 text-sm">
-                        検索条件を変更するか、新しい予約を待ちましょう
+                    <div className="px-4 py-16 text-center">
+                      <CalendarX2 className="w-16 h-16 mx-auto text-neutral-300 mb-6" />
+                      <p className="text-heading-2 text-neutral-700 mb-3">予約がありません</p>
+                      <p className="text-body text-neutral-500 max-w-md mx-auto">
+                        検索条件を変更するか、会員からの新しい予約をお待ちください
                       </p>
                     </div>
                   </td>
