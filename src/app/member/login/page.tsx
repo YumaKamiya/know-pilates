@@ -35,7 +35,7 @@ export default function MemberLoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-100/50 to-primary-200/30 px-4 py-8">
-      <div className="max-w-md w-full space-y-8 p-6 sm:p-8 bg-white rounded-lg shadow-lg">
+      <div className="max-w-md w-full space-y-8 p-10 bg-gradient-to-br from-white via-primary-50/10 to-white rounded-3xl shadow-xl shadow-primary-200/20">
         <div>
           <h2 className="text-center text-xl sm:text-2xl font-bold text-neutral-900">
             おかえりなさい
@@ -46,7 +46,7 @@ export default function MemberLoginPage() {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
+            <div className="bg-gradient-to-br from-red-50/80 to-red-100/60 border border-red-200/50 text-red-600 px-5 py-4 rounded-2xl shadow-md shadow-red-100/30">
               {error}
             </div>
           )}
@@ -66,7 +66,7 @@ export default function MemberLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="block w-full px-4 py-3 min-h-[48px] text-base border border-primary-100/50 rounded-xl bg-gradient-to-br from-white to-primary-50/5 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-300"
               />
             </div>
             <div>
@@ -81,14 +81,14 @@ export default function MemberLoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="block w-full px-4 py-3 min-h-[48px] text-base border border-primary-100/50 rounded-xl bg-gradient-to-br from-white to-primary-50/5 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-300"
               />
             </div>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex justify-center items-center min-h-[48px] px-4 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] transition-transform"
+            className="w-full flex justify-center items-center min-h-[48px] px-4 py-3 border border-transparent rounded-xl shadow-md bg-gradient-to-r from-primary-600 to-primary-700 text-white font-medium hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'ログイン中...' : 'ログイン'}
           </button>
