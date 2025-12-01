@@ -76,7 +76,7 @@ export default function MemberLayout({
         )}
 
         {/* メインコンテンツ */}
-        <main className="pt-14 pb-24 px-4">{children}</main>
+        <main className="pt-20 pb-24 px-4">{children}</main>
 
         {/* ボトムナビゲーション */}
         <BottomNav items={navigation} activeColor="text-primary-600" />
