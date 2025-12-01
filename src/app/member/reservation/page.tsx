@@ -252,9 +252,8 @@ export default function ReservationPage() {
   return (
     <MemberLayout>
       <div className="max-w-6xl mx-auto">
-        {/* ヘッダー */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <h1 className="text-neutral-900" style={{ fontSize: 'var(--font-size-heading-1)', lineHeight: 'var(--line-height-heading-1)', fontWeight: '700' }}>レッスンを予約する</h1>
+        {/* ヘッダー - チケット残数のみ表示 */}
+        <div className="flex justify-start mb-6">
           <div className="bg-primary-100 text-primary-700 px-4 py-2 rounded-lg" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>
             {memberInfo?.planType === 'monthly' ? (
               <>

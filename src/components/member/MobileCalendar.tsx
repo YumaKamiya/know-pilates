@@ -93,43 +93,66 @@ export default function MobileCalendar({ slots, onSelectSlot, onDateChange, disa
   };
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
+    <div className="bg-gradient-to-br from-white via-primary-50/20 to-white rounded-3xl shadow-xl shadow-primary-200/20 overflow-hidden">
       {/* 日付ナビゲーション */}
-      <div className="flex items-center justify-between px-2 py-3 bg-neutral-50 border-b">
+      <div className="flex items-center justify-between px-4 py-5 bg-gradient-to-r from-primary-50/30 via-white to-primary-50/30 border-b border-primary-100/50">
         <button
           onClick={() => navigateDays('prev')}
-          className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-neutral-200 active:bg-neutral-300 transition-colors"
+          className="p-2 min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full hover:bg-primary-100/50 active:bg-primary-200/50 transition-all duration-300 hover:scale-110 active:scale-95"
           aria-label="前の3日間"
         >
           <span className="text-neutral-600 text-lg">←</span>
         </button>
-        <span className="font-medium text-neutral-900 text-base">
-          {formatDateRange()}
-        </span>
+        <div className="px-6 py-2.5 bg-gradient-to-r from-primary-50/20 via-primary-50/10 to-primary-50/20 rounded-full border border-primary-100/30">
+          <span className="font-medium text-neutral-900 text-base">
+            {formatDateRange()}
+          </span>
+        </div>
         <button
           onClick={() => navigateDays('next')}
-          className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-neutral-200 active:bg-neutral-300 transition-colors"
+          className="p-2 min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full hover:bg-primary-100/50 active:bg-primary-200/50 transition-all duration-300 hover:scale-110 active:scale-95"
           aria-label="次の3日間"
         >
           <span className="text-neutral-600 text-lg">→</span>
         </button>
       </div>
 
+      {/* カレンダーの見方 */}
+      <div className="px-4 py-4 bg-gradient-to-r from-primary-50/20 via-white to-primary-50/20 border-b border-primary-100/50">
+        <p className="font-semibold text-neutral-700 mb-3 text-sm">カレンダーの見方</p>
+        <div className="flex items-center gap-6 text-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-5 h-5 bg-gradient-to-br from-primary-50 via-primary-100 to-primary-50 rounded border border-primary-200 flex-shrink-0"></div>
+            <span className="text-neutral-700">予約可能</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-5 h-5 bg-neutral-100 rounded border border-neutral-200 flex-shrink-0"></div>
+            <span className="text-neutral-700">空きなし</span>
+          </div>
+        </div>
+      </div>
+
       {/* カレンダーグリッド: 縦=時間、横=日付 */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
         <table className="w-full min-w-[300px]">
-          <thead>
+          <thead className="sticky top-0 z-20 bg-gradient-to-r from-primary-50/30 via-white to-primary-50/30 backdrop-blur-sm">
             <tr>
-              <th className="w-14 p-2 text-xs text-neutral-500 border-b bg-white sticky left-0 z-10">
+              <th className="w-14 p-3 text-xs text-neutral-600 font-semibold bg-gradient-to-r from-primary-50/30 via-white to-primary-50/30 sticky left-0 z-30 border-b border-primary-100/50">
                 時間
               </th>
               {visibleDays.map((day) => (
-                <th key={day.toISOString()} className="p-2 border-b border-l min-w-[80px]">
-                  <div className="text-xs text-neutral-500">
+                <th key={day.toISOString()} className={`p-3 border-b border-l border-primary-100/50 min-w-[80px] ${
+                  isToday(day)
+                    ? 'bg-primary-600'
+                    : 'bg-primary-100'
+                }`}>
+                  <div className={`text-xs font-medium ${
+                    isToday(day) ? 'text-white' : 'text-neutral-500'
+                  }`}>
                     {day.toLocaleDateString('ja-JP', { weekday: 'short' })}
                   </div>
                   <div className={`text-lg font-bold ${
-                    isToday(day) ? 'text-primary-600' : 'text-neutral-900'
+                    isToday(day) ? 'text-white' : 'text-neutral-900'
                   }`}>
                     {day.getDate()}
                   </div>
@@ -140,7 +163,7 @@ export default function MobileCalendar({ slots, onSelectSlot, onDateChange, disa
           <tbody>
             {TIME_SLOTS.map((hour) => (
               <tr key={hour}>
-                <td className="p-2 text-xs text-neutral-500 text-center border-r bg-white sticky left-0 z-10">
+                <td className="p-2 text-xs text-neutral-500 text-center border-r border-primary-100/30 bg-white sticky left-0 z-10">
                   {hour}:00
                 </td>
                 {visibleDays.map((day) => {
@@ -148,7 +171,7 @@ export default function MobileCalendar({ slots, onSelectSlot, onDateChange, disa
                   const isPast = isPastDateTime(day, hour);
 
                   return (
-                    <td key={day.toISOString()} className="p-1 border-r border-b align-top">
+                    <td key={day.toISOString()} className="p-2 border-r border-b border-primary-100/30 align-top">
                       {daySlots.length > 0 && !isPast ? (
                         <div className="space-y-1">
                           {daySlots.map((slot) => (
@@ -156,14 +179,14 @@ export default function MobileCalendar({ slots, onSelectSlot, onDateChange, disa
                               key={slot.id}
                               onClick={() => onSelectSlot(slot)}
                               disabled={disabled}
-                              className="w-full min-h-[44px] px-2 py-2 text-sm bg-primary-100 text-primary-700 rounded-lg hover:bg-primary-200 active:bg-primary-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                              className="w-full min-h-[48px] px-3 py-3 text-sm bg-gradient-to-br from-primary-50 via-primary-100 to-primary-50 text-primary-700 rounded-xl shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                             >
                               {formatTime(slot.start_at)}
                             </button>
                           ))}
                         </div>
                       ) : (
-                        <div className="min-h-[44px] flex items-center justify-center text-neutral-300 text-xs">
+                        <div className="min-h-[48px] flex items-center justify-center text-neutral-500/50 text-xs">
                           -
                         </div>
                       )}
