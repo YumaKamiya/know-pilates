@@ -5,6 +5,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 const ALLOWED_ORIGINS = [
   'http://localhost:3000',
   'http://localhost:3001',
+  'https://know-pilates.vercel.app',
   process.env.NEXT_PUBLIC_APP_URL,
 ].filter(Boolean);
 
@@ -25,7 +26,16 @@ export async function middleware(request: NextRequest) {
       }
     }
 
+    // デバッグログ
     if (requestOrigin && !ALLOWED_ORIGINS.includes(requestOrigin)) {
+      console.log('[CSRF Check Failed]', {
+        method: request.method,
+        path: request.nextUrl.pathname,
+        origin,
+        referer,
+        requestOrigin,
+        allowedOrigins: ALLOWED_ORIGINS,
+      });
       return NextResponse.json(
         { error: '不正なリクエストです' },
         { status: 403 }
