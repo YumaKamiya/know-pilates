@@ -1,0 +1,10 @@
+{
+  "project_name": "know-pilates",
+  "log_path": "docs/WORKLOG.md",
+  "progress_path": "docs/PROGRESS.md",
+  "notion_parent_page_id": "39455e03-f299-46cb-8d34-19dbcd98925d",
+  "phase_pattern": "**Phase {number}: {title}** {status}",
+  "github_repo": "YumaKamiya/know-pilates",
+  "enable_github_links": true,
+  "last_sync_date": "2025-12-01"
+}
