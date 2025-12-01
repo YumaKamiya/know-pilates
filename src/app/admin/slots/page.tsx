@@ -129,7 +129,7 @@ export default function AdminSlotsPage() {
         </div>
 
         {loading ? (
-          <div className="bg-white rounded-lg shadow p-8 text-center text-neutral-500">
+          <div className="bg-gradient-to-br from-white via-primary-50/10 to-white rounded-2xl shadow-md shadow-primary-100/20 p-8 text-center text-neutral-500">
             読み込み中...
           </div>
         ) : (
@@ -142,10 +142,10 @@ export default function AdminSlotsPage() {
             {/* デスクトップ: 既存の週間表示 */}
             <div className="hidden md:block space-y-4">
               {/* 週ナビゲーション */}
-              <div className="flex items-center justify-between bg-white rounded-lg shadow p-4">
+              <div className="flex items-center justify-between bg-gradient-to-br from-white via-primary-50/10 to-white rounded-2xl shadow-md shadow-primary-100/20 p-4">
                 <button
                   onClick={() => setCurrentWeek(subWeeks(currentWeek, 1))}
-                  className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-primary-50/50 rounded-xl transition-all duration-300 active:scale-95"
                 >
                   ← 前週
                 </button>
@@ -155,23 +155,23 @@ export default function AdminSlotsPage() {
                 </span>
                 <button
                   onClick={() => setCurrentWeek(addWeeks(currentWeek, 1))}
-                  className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="px-4 py-2 min-h-[44px] text-neutral-600 hover:bg-primary-50/50 rounded-xl transition-all duration-300 active:scale-95"
                 >
                   次週 →
                 </button>
               </div>
 
               {/* カレンダーグリッド */}
-              <div className="bg-white rounded-lg shadow overflow-hidden">
+              <div className="bg-gradient-to-br from-white via-primary-50/10 to-white rounded-2xl shadow-md shadow-primary-100/20 overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full">
-                    <thead className="bg-neutral-100 sticky top-0 z-10">
+                    <thead className="bg-gradient-to-r from-primary-50/30 via-white to-primary-50/30 sticky top-0 z-10">
                       <tr>
-                        <th className="px-4 py-3 text-left font-semibold text-neutral-700 border-r border-neutral-200 bg-neutral-100" style={{ fontSize: 'var(--font-size-caption)' }}>
+                        <th className="px-4 py-3 text-left font-semibold text-neutral-700 border-r border-primary-100/30 bg-gradient-to-r from-primary-50/30 via-white to-primary-50/30" style={{ fontSize: 'var(--font-size-caption)' }}>
                           時間
                         </th>
                         {weekDays.map((day) => (
-                          <th key={day.toISOString()} className="p-2 font-medium text-neutral-500 border-b min-w-[120px]" style={{ fontSize: 'var(--font-size-caption)' }}>
+                          <th key={day.toISOString()} className="p-2 font-medium text-neutral-500 border-b border-primary-100/30 min-w-[120px]" style={{ fontSize: 'var(--font-size-caption)' }}>
                             <div>{format(day, 'E', { locale: ja })}</div>
                             <div className="text-lg font-bold text-neutral-900">{format(day, 'd')}</div>
                           </th>
@@ -180,24 +180,24 @@ export default function AdminSlotsPage() {
                     </thead>
                     <tbody>
                       {hours.map((hour) => (
-                        <tr key={hour} className="border-b">
-                          <td className="px-4 py-3 font-medium text-neutral-700 border-r border-neutral-200 bg-neutral-50 sticky left-0 z-10" style={{ fontSize: 'var(--font-size-caption)' }}>
+                        <tr key={hour} className="border-b border-primary-100/30">
+                          <td className="px-4 py-3 font-medium text-neutral-700 border-r border-primary-100/30 bg-gradient-to-r from-primary-50/10 via-white to-primary-50/10 sticky left-0 z-10" style={{ fontSize: 'var(--font-size-caption)' }}>
                             {hour}:00
                           </td>
                           {weekDays.map((day) => {
                             const daySlots = getSlotForDateTime(day, hour);
                             return (
-                              <td key={day.toISOString()} className="p-1 border-r min-h-[60px] align-top">
+                              <td key={day.toISOString()} className="p-2 border-r border-primary-100/30 min-h-[60px] align-top">
                                 {daySlots.map((slot) => {
                                   const hasReservation = slot.reservations && slot.reservations.length > 0;
                                   const reservation = hasReservation ? slot.reservations[0] : null;
                                   return (
                                     <div
                                       key={slot.id}
-                                      className={`p-2 rounded shadow-sm mb-1 ${
+                                      className={`p-3 rounded-xl shadow-sm mb-1 ${
                                         hasReservation
-                                          ? 'bg-blue-100 text-blue-800'
-                                          : 'bg-primary-500'
+                                          ? 'bg-gradient-to-br from-blue-50 to-blue-100 text-blue-700 border border-blue-200'
+                                          : 'bg-gradient-to-br from-primary-50 via-primary-100 to-primary-50 text-primary-700 border border-primary-200'
                                       }`}
                                     >
                                       <div className="font-medium" style={{ fontSize: 'var(--font-size-caption)' }}>
@@ -206,17 +206,17 @@ export default function AdminSlotsPage() {
                                       </div>
                                       <div className="mt-1" style={{ fontSize: 'var(--font-size-caption)' }}>
                                         {hasReservation ? (
-                                          <span>
+                                          <span className="font-medium">
                                             {reservation?.type === 'trial' ? '体験' : '会員'}予約
                                           </span>
                                         ) : (
-                                          <span className="font-semibold text-white">空き</span>
+                                          <span className="font-semibold">空き</span>
                                         )}
                                       </div>
                                       {!hasReservation && (
                                         <button
                                           onClick={() => handleDeleteSlot(slot.id)}
-                                          className="mt-1 min-h-[32px] text-white underline hover:text-primary-100 transition-colors" style={{ fontSize: 'var(--font-size-caption)' }}
+                                          className="mt-2 min-h-[32px] w-full bg-gradient-to-r from-red-50 to-red-100 text-red-600 hover:from-red-100 hover:to-red-200 active:scale-95 rounded-lg transition-all duration-300" style={{ fontSize: 'var(--font-size-caption)' }}
                                         >
                                           削除
                                         </button>
@@ -240,7 +240,7 @@ export default function AdminSlotsPage() {
         {/* 作成モーダル */}
         {showCreateModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+            <div className="bg-gradient-to-br from-white via-primary-50/10 to-white rounded-3xl shadow-xl shadow-primary-200/20 p-6 w-full max-w-md">
               <h2 className="text-lg font-bold mb-4">予約枠を作成</h2>
               <form onSubmit={handleCreateSlot} className="space-y-4">
                 <div>
@@ -249,7 +249,7 @@ export default function AdminSlotsPage() {
                     type="date"
                     value={createForm.date}
                     onChange={(e) => setCreateForm({ ...createForm, date: e.target.value })}
-                    className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg"
+                    className="block w-full px-4 py-3 min-h-[48px] text-base border border-primary-100/50 rounded-xl bg-gradient-to-br from-white to-primary-50/5 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-300"
                     required
                   />
                 </div>
@@ -260,7 +260,7 @@ export default function AdminSlotsPage() {
                       type="time"
                       value={createForm.startTime}
                       onChange={(e) => setCreateForm({ ...createForm, startTime: e.target.value })}
-                      className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg"
+                      className="block w-full px-4 py-3 min-h-[48px] text-base border border-primary-100/50 rounded-xl bg-gradient-to-br from-white to-primary-50/5 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-300"
                       required
                     />
                   </div>
@@ -270,7 +270,7 @@ export default function AdminSlotsPage() {
                       type="time"
                       value={createForm.endTime}
                       onChange={(e) => setCreateForm({ ...createForm, endTime: e.target.value })}
-                      className="block w-full px-4 py-3 min-h-[48px] text-base border border-neutral-300 rounded-lg"
+                      className="block w-full px-4 py-3 min-h-[48px] text-base border border-primary-100/50 rounded-xl bg-gradient-to-br from-white to-primary-50/5 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-300"
                       required
                     />
                   </div>
@@ -279,14 +279,14 @@ export default function AdminSlotsPage() {
                   <button
                     type="button"
                     onClick={() => setShowCreateModal(false)}
-                    className="flex-1 px-4 py-3 min-h-[48px] text-neutral-600 hover:bg-neutral-100 active:bg-neutral-200 rounded-lg font-medium transition-colors"
+                    className="flex-1 px-4 py-3 min-h-[48px] text-neutral-600 hover:bg-primary-50/50 active:scale-95 rounded-xl font-medium transition-all duration-300"
                   >
                     キャンセル
                   </button>
                   <button
                     type="submit"
                     disabled={creating}
-                    className="flex-1 px-4 py-3 min-h-[48px] bg-primary-600 text-white rounded-lg hover:bg-primary-700 active:bg-primary-800 disabled:opacity-50 font-medium transition-colors"
+                    className="flex-1 px-4 py-3 min-h-[48px] bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 font-medium transition-all duration-300"
                   >
                     {creating ? '作成中...' : '作成'}
                   </button>
