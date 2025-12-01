@@ -94,20 +94,20 @@ export default function ReservationsPage() {
   const getStatusBadge = (reservation: Reservation) => {
     if (reservation.status === 'cancelled') {
       return (
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-neutral-50 to-neutral-100 text-neutral-700 shadow-sm">
           キャンセル済み
         </span>
       );
     }
     if (isPast(reservation)) {
       return (
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 shadow-sm">
           完了
         </span>
       );
     }
     return (
-      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 shadow-sm">
         予約済み
       </span>
     );
@@ -137,10 +137,10 @@ export default function ReservationsPage() {
 
         {message && (
           <div
-            className={`mb-6 px-4 py-3 rounded ${
+            className={`mb-6 px-5 py-4 rounded-2xl shadow-md ${
               message.type === 'success'
-                ? 'bg-green-50 border border-green-200 text-green-600'
-                : 'bg-red-50 border border-red-200 text-red-600'
+                ? 'bg-gradient-to-br from-green-50/80 to-green-100/60 border border-green-200/50 text-green-600 shadow-green-100/30'
+                : 'bg-gradient-to-br from-red-50/80 to-red-100/60 border border-red-200/50 text-red-600 shadow-red-100/30'
             }`}
           >
             {message.text}
@@ -150,7 +150,7 @@ export default function ReservationsPage() {
         {/* 今後の予約 */}
         <section className="mb-8">
           <h2 className="text-neutral-900 mb-4" style={{ fontSize: 'var(--font-size-heading-3)', lineHeight: 'var(--line-height-heading-3)', fontWeight: '600' }}>ご予約いただいているレッスン</h2>
-          <div className="bg-white rounded-lg shadow">
+          <div className="bg-gradient-to-b from-white via-primary-50/5 to-white rounded-2xl shadow-md shadow-primary-100/20">
             {upcomingReservations.length === 0 ? (
               <div className="p-6 sm:p-8 text-center">
                 <Calendar className="w-16 h-16 mx-auto text-neutral-300 mb-4" />
@@ -167,7 +167,7 @@ export default function ReservationsPage() {
                 </Link>
               </div>
             ) : (
-              <div className="divide-y divide-neutral-200">
+              <div className="divide-y divide-primary-100/30">
                 {upcomingReservations.map((reservation) => (
                   <div key={reservation.id} className="px-6 py-4">
                     <div className="flex items-center justify-between">
@@ -215,13 +215,13 @@ export default function ReservationsPage() {
         {/* 過去の予約 */}
         <section>
           <h2 className="text-neutral-900 mb-4" style={{ fontSize: 'var(--font-size-heading-3)', lineHeight: 'var(--line-height-heading-3)', fontWeight: '600' }}>これまでのレッスン</h2>
-          <div className="bg-white rounded-lg shadow">
+          <div className="bg-gradient-to-b from-white via-primary-50/5 to-white rounded-2xl shadow-md shadow-primary-100/20">
             {pastReservations.length === 0 ? (
               <div className="px-6 py-8 text-center text-neutral-500">
                 レッスン履歴はまだありません
               </div>
             ) : (
-              <div className="divide-y divide-neutral-200">
+              <div className="divide-y divide-primary-100/30">
                 {pastReservations.map((reservation) => (
                   <div key={reservation.id} className="px-6 py-4">
                     <div className="flex items-center justify-between">
