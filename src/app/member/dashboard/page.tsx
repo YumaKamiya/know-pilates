@@ -154,7 +154,7 @@ export default function MemberDashboardPage() {
   if (error) {
     return (
       <MemberLayout>
-        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+        <div className="bg-gradient-to-br from-red-50/80 to-red-100/60 border border-red-200/50 text-red-600 px-5 py-4 rounded-2xl shadow-md shadow-red-100/30">
           {error}
         </div>
       </MemberLayout>
@@ -170,7 +170,7 @@ export default function MemberDashboardPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* チケット残高 */}
-          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+          <div className="bg-gradient-to-br from-white via-primary-50/10 to-white rounded-2xl shadow-md shadow-primary-100/20 p-6 sm:p-8">
             <h2 className="text-neutral-500 mb-2" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)', fontWeight: '400' }}>あなたのチケット</h2>
             <div className="flex items-baseline">
               <span className="text-4xl font-bold text-primary">
@@ -186,7 +186,7 @@ export default function MemberDashboardPage() {
           </div>
 
           {/* 予約ボタン */}
-          <div className="bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg shadow-lg p-4 sm:p-6 text-white">
+          <div className="bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl shadow-xl shadow-primary-300/30 p-6 sm:p-8 text-white hover:shadow-2xl transition-shadow duration-300">
             <div className="flex items-start gap-3 mb-6">
               <Calendar className="w-7 h-7 text-white flex-shrink-0 mt-1" />
               <div>
@@ -200,7 +200,7 @@ export default function MemberDashboardPage() {
             </div>
             <Link
               href="/member/reservation"
-              className="inline-block w-full px-6 py-4 min-h-[48px] bg-white text-primary-700 rounded-lg text-center font-bold text-lg hover:bg-white/95 active:bg-white/90 transition-colors shadow-md"
+              className="inline-block w-full px-6 py-4 min-h-[48px] bg-white text-primary-700 rounded-xl text-center font-bold text-lg hover:bg-white/95 active:bg-white/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-md"
             >
               今すぐ予約する
             </Link>
@@ -208,11 +208,11 @@ export default function MemberDashboardPage() {
         </div>
 
         {/* 今後の予約 */}
-        <div className="bg-white rounded-lg shadow">
-          <div className="px-6 py-4 border-b border-neutral-200">
+        <div className="bg-gradient-to-b from-white via-primary-50/5 to-white rounded-2xl shadow-md shadow-primary-100/20">
+          <div className="px-6 py-4 border-b border-primary-100/30">
             <h2 className="text-neutral-900" style={{ fontSize: 'var(--font-size-heading-3)', lineHeight: 'var(--line-height-heading-3)', fontWeight: '600' }}>ご予約いただいているレッスン</h2>
           </div>
-          <div className="divide-y divide-neutral-200">
+          <div className="divide-y divide-primary-100/30">
             {memberInfo?.upcomingReservations.length === 0 ? (
               <div className="px-6 py-8 text-center text-neutral-500" style={{ fontSize: 'var(--font-size-body)', lineHeight: 'var(--line-height-body)' }}>
                 予約されたレッスンはまだありません
@@ -230,7 +230,7 @@ export default function MemberDashboardPage() {
                       {new Date(reservation.endAt).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full font-medium bg-green-100 text-green-800" style={{ fontSize: 'var(--font-size-caption)' }}>
+                  <span className="inline-flex items-center px-3 py-1 rounded-full font-medium bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 shadow-sm" style={{ fontSize: 'var(--font-size-caption)' }}>
                     予約済み
                   </span>
                 </div>
@@ -238,7 +238,7 @@ export default function MemberDashboardPage() {
             )}
           </div>
           {memberInfo && memberInfo.upcomingReservations.length > 0 && (
-            <div className="px-6 py-4 border-t border-neutral-200">
+            <div className="px-6 py-4 border-t border-primary-100/30">
               <Link
                 href="/member/reservations"
                 className="text-primary hover:text-primary/80 font-medium" style={{ fontSize: 'var(--font-size-caption)', lineHeight: 'var(--line-height-caption)' }}
