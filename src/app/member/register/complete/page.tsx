@@ -26,11 +26,11 @@ export default function RegisterCompletePage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5 py-12 px-4">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg text-center">
+      <div className="max-w-md w-full space-y-8 p-10 bg-gradient-to-br from-white via-primary-50/10 to-white rounded-3xl shadow-xl shadow-primary-200/20 text-center">
         <div>
-          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
+          <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-3xl bg-gradient-to-br from-green-50 to-green-100 shadow-lg shadow-green-100/30">
             <svg
-              className="h-8 w-8 text-green-600"
+              className="h-12 w-12 text-green-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -51,7 +51,7 @@ export default function RegisterCompletePage() {
           </p>
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-left">
+        <div className="bg-gradient-to-br from-amber-50/60 to-amber-100/40 border border-amber-200/50 rounded-2xl p-5 shadow-sm shadow-amber-100/20 text-left">
           <h3 className="text-sm font-medium text-amber-800">レッスンご予約の前に</h3>
           <p className="mt-1 text-sm text-amber-700">
             レッスンのご予約には、プランまたはチケットのご購入が必要です。
@@ -65,7 +65,7 @@ export default function RegisterCompletePage() {
           </p>
           <Link
             href="/member/login"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+            className="w-full flex justify-center items-center min-h-[48px] px-4 py-3 border border-transparent rounded-xl shadow-md bg-gradient-to-r from-primary-600 to-primary-700 text-white font-medium hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400 transition-all duration-300"
           >
             すぐにログインする
           </Link>
