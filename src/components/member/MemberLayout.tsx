@@ -30,7 +30,7 @@ export default function MemberLayout({
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-gradient-to-b from-neutral-50 via-white to-primary-50/10">
       {/* デスクトップ: サイドバー表示 */}
       <div className="hidden md:flex">
         <MemberSidebar />
@@ -60,13 +60,13 @@ export default function MemberLayout({
               className="fixed inset-0 z-40"
               onClick={() => setIsMenuOpen(false)}
             />
-            <div className="fixed top-14 right-4 bg-white rounded-lg shadow-lg z-50 py-2 min-w-[160px]">
+            <div className="fixed top-14 right-4 bg-gradient-to-br from-white to-primary-50/5 rounded-2xl shadow-xl shadow-primary-100/20 z-50 py-2 min-w-[160px]">
               <button
                 onClick={() => {
                   setIsMenuOpen(false);
                   handleLogout();
                 }}
-                className="flex items-center w-full px-4 py-3 text-neutral-700 hover:bg-neutral-100 min-h-[44px]"
+                className="flex items-center w-full px-4 py-3 text-neutral-700 hover:bg-primary-50/50 active:scale-95 transition-all duration-300 min-h-[44px] rounded-xl mx-1"
               >
                 <LogOut className="mr-3 w-5 h-5" />
                 ログアウトする
