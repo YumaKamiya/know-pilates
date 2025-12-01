@@ -83,15 +83,15 @@ export default function AdminReservationsPage() {
 
   const getStatusBadge = (status: string) => {
     const styles: Record<string, string> = {
-      confirmed: 'bg-green-100 text-green-800',
-      cancelled: 'bg-neutral-100 text-neutral-800',
+      confirmed: 'bg-gradient-to-r from-green-50 to-green-100 text-green-700 border border-green-200 shadow-sm',
+      cancelled: 'bg-gradient-to-r from-neutral-50 to-neutral-100 text-neutral-700 border border-neutral-200 shadow-sm',
     };
     const labels: Record<string, string> = {
       confirmed: '確定',
       cancelled: 'キャンセル',
     };
     return (
-      <span className={`px-2 py-1 text-xs rounded-full ${styles[status] || 'bg-neutral-100'}`}>
+      <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${styles[status] || 'bg-gradient-to-r from-neutral-50 to-neutral-100 border border-neutral-200 shadow-sm'}`}>
         {labels[status] || status}
       </span>
     );
@@ -99,15 +99,15 @@ export default function AdminReservationsPage() {
 
   const getTypeBadge = (type: string) => {
     const styles: Record<string, string> = {
-      member: 'bg-blue-100 text-blue-800',
-      trial: 'bg-purple-100 text-purple-800',
+      member: 'bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border border-blue-200 shadow-sm',
+      trial: 'bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 border border-purple-200 shadow-sm',
     };
     const labels: Record<string, string> = {
       member: '会員',
       trial: '体験',
     };
     return (
-      <span className={`px-2 py-1 text-xs rounded-full ${styles[type] || 'bg-neutral-100'}`}>
+      <span className={`inline-flex items-center px-3 py-1 text-xs font-medium rounded-full ${styles[type] || 'bg-gradient-to-r from-neutral-50 to-neutral-100 border border-neutral-200 shadow-sm'}`}>
         {labels[type] || type}
       </span>
     );
@@ -126,21 +126,21 @@ export default function AdminReservationsPage() {
         </h1>
 
         {/* 検索フォーム */}
-        <form onSubmit={handleSearch} className="bg-white rounded-lg shadow p-4">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <form onSubmit={handleSearch} className="bg-gradient-to-br from-white via-primary-50/10 to-white rounded-2xl shadow-md shadow-primary-100/20 p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <input
               type="text"
               inputMode="search"
               placeholder="会員名・メールで検索"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="px-4 py-3 min-h-[48px] border border-neutral-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary"
+              className="px-4 py-3 min-h-[48px] border border-primary-100/50 rounded-xl bg-gradient-to-br from-white to-primary-50/5 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-300"
             />
 
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="px-4 py-3 min-h-[48px] border border-neutral-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary"
+              className="px-4 py-3 min-h-[48px] border border-primary-100/50 rounded-xl bg-gradient-to-br from-white to-primary-50/5 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-300"
             >
               <option value="">すべてのステータス</option>
               <option value="confirmed">確定</option>
@@ -150,7 +150,7 @@ export default function AdminReservationsPage() {
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              className="px-4 py-3 min-h-[48px] border border-neutral-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary"
+              className="px-4 py-3 min-h-[48px] border border-primary-100/50 rounded-xl bg-gradient-to-br from-white to-primary-50/5 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 transition-all duration-300"
             >
               <option value="">すべての予約タイプ</option>
               <option value="member">会員予約</option>
@@ -160,23 +160,23 @@ export default function AdminReservationsPage() {
 
           <button
             type="submit"
-            className="mt-3 w-full sm:w-auto px-6 py-3 min-h-[48px] bg-primary text-white rounded-lg text-base font-medium hover:bg-primary/90 transition-colors"
+            className="mt-4 w-full sm:w-auto px-6 py-3 min-h-[48px] bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] text-base font-medium transition-all duration-300"
           >
             検索
           </button>
         </form>
 
         {/* デスクトップ: テーブル */}
-        <div className="hidden md:block bg-white rounded-lg shadow overflow-x-auto">
+        <div className="hidden md:block bg-gradient-to-br from-white via-primary-50/10 to-white rounded-2xl shadow-md shadow-primary-100/20 overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-neutral-50">
+            <thead className="bg-gradient-to-r from-primary-50/30 via-white to-primary-50/30">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700">会員名</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700">メール</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700">予約日時</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700">ステータス</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700">タイプ</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700">操作</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700 border-b border-primary-100/30">会員名</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700 border-b border-primary-100/30">メール</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700 border-b border-primary-100/30">予約日時</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700 border-b border-primary-100/30">ステータス</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700 border-b border-primary-100/30">タイプ</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-neutral-700 border-b border-primary-100/30">操作</th>
               </tr>
             </thead>
             <tbody>
@@ -200,7 +200,7 @@ export default function AdminReservationsPage() {
                 </tr>
               ) : (
                 reservations.map((r) => (
-                  <tr key={r.id} className="border-t hover:bg-neutral-50">
+                  <tr key={r.id} className="border-t border-primary-100/30 hover:bg-primary-50/20 transition-colors duration-300">
                     <td className="px-4 py-4 text-base">
                       {r.members?.name || '体験予約'}
                     </td>
@@ -238,16 +238,20 @@ export default function AdminReservationsPage() {
         {/* モバイル: カード */}
         <div className="block md:hidden space-y-4">
           {loading ? (
-            <div className="bg-white rounded-lg shadow p-6 text-center text-neutral-500">
+            <div className="bg-gradient-to-br from-white via-primary-50/10 to-white rounded-2xl shadow-md shadow-primary-100/20 p-6 text-center text-neutral-500">
               読み込み中...
             </div>
           ) : reservations.length === 0 ? (
-            <div className="bg-white rounded-lg shadow p-6 text-center text-neutral-500">
-              予約がありません
+            <div className="bg-gradient-to-br from-white via-primary-50/10 to-white rounded-2xl shadow-md shadow-primary-100/20 p-8 text-center">
+              <CalendarX2 className="w-16 h-16 mx-auto text-neutral-300 mb-4" />
+              <p className="text-heading-2 text-neutral-700 mb-2">予約がありません</p>
+              <p className="text-body text-neutral-500">
+                検索条件を変更するか、会員からの新しい予約をお待ちください
+              </p>
             </div>
           ) : (
             reservations.map((r) => (
-              <div key={r.id} className="bg-white rounded-lg shadow p-4">
+              <div key={r.id} className="bg-gradient-to-br from-white via-primary-50/10 to-white rounded-2xl shadow-md shadow-primary-100/20 p-5">
                 <div className="space-y-3">
                   <div className="font-medium text-lg">
                     {r.members?.name || '体験予約'}
